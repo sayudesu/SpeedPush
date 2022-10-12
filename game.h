@@ -5,7 +5,7 @@ namespace Game
 	// ウインドウモード設定
 	constexpr bool kWindowMode = true;
 	// ウインドウ名
-	const char* const kTitleText = "タイミング合わせ";
+	const char* const kTitleText = "SpeedPush";
 	// ウインドウサイズ
 	constexpr int kScreenWidth = 640;
 	constexpr int kScreenHeight = 480;

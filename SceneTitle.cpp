@@ -4,6 +4,12 @@
 #include "DxLib.h"
 #include "game.h"
 
+namespace
+{
+	//色指定
+	constexpr int kColorWhite = 255;
+}
+
 void SceneTitle::init()
 {
 	m_isEnd = false;
@@ -29,9 +35,9 @@ SceneBase* SceneTitle::update()
 
 void SceneTitle::draw()
 {
-	DrawString(0, 0, "タイトル画面", GetColor(255, 255, 255));
-	DrawString(Game::kScreenWidth / 2 - 130, Game::kScreenHeight / 2 - 30, "ゲームルールを確認するには　＜ ↑ ＞　", GetColor(255, 255, 255));
-	DrawString(Game::kScreenWidth / 2 - 130, Game::kScreenHeight / 2, "早押しゲームをプレイは　　　＜ A ＞　", GetColor(255, 255, 255));
+	DrawString(0, 0, "タイトル画面", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	DrawString(Game::kScreenWidth / 2 - 170, Game::kScreenHeight / 2 - 30, "ゲームルールを確認するには　＜ ↑ ＞　", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	DrawString(Game::kScreenWidth / 2 - 170, Game::kScreenHeight / 2,      "早押しゲームをプレイは　　　＜ A ＞　", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	//PCの場合
 	//DrawString(Game::kScreenWidth / 2 - 80, Game::kScreenHeight - 100, "< s　p　a　c　e >", GetColor(255, 255, 255));
 }

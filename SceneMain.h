@@ -27,6 +27,8 @@ private:
 
 	bool m_isPushScreen;
 
+	bool m_isFeint;
+
 	bool m_isKeyPush;
 
 	bool m_isMissText;
@@ -40,6 +42,8 @@ private:
 	int m_sphereSize;
 
 	int m_time;
+
+	int m_feintTime;
 
 	int m_buttonClick;
 };

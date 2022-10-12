@@ -8,11 +8,17 @@
 namespace
 {
 	//数字合わせ最大数
-	constexpr int kTimeRand = 1000;
+	constexpr int kTimeRand = 1000;//1000
 	//数字合わせ正解数
-	constexpr int kTimeStop = 500;
+	constexpr int kTimeStop = 500;//500
+	//フェイント用の数字
+	constexpr int kFeintStop = 100;//100
 	//ボタンを押すまでの猶予
 	constexpr int kTimeHelp = 15;
+	//フェイント用
+	constexpr int kFeintTimeHelp = 60;
+	//色指定
+	constexpr int kColorWhite = 255;
 }
 
 void SceneMain::init()
@@ -22,12 +28,14 @@ void SceneMain::init()
 	m_isPushScreen = false;
 	m_isKeyPush = false;
 	m_isMissText = false;
+	m_isFeint = false;
 
 	m_fadeIn = 0;	//色を変更
 	m_fadeOut = 0;
 	m_justTime = 0;	//乱数を代入
 	m_sphereSize = 100;	//球体のサイズを変更
 	m_time = 0;	//制限時間をカウント
+	m_feintTime = 0; //フェイント時間をカウント
 	m_buttonClick = 0;	//クリック回数をカウント
 }
 
@@ -50,7 +58,12 @@ SceneBase* SceneMain::update()
 		m_isMissText = true;
 		m_fadeOut = 255;
 	}
-
+	
+	if (padState & PAD_INPUT_3)
+	{
+		return(new SceneTitle);
+	}
+	
 	//最大数からランダムに数字を代入
 	m_justTime = GetRand(kTimeRand);
 	//ランダムに代入された数字と照らし合わせる
@@ -61,14 +74,21 @@ SceneBase* SceneMain::update()
 		m_isMissText = false;
 
 	}
+
+	if (m_justTime == kFeintStop)
+	{
+		m_isFeint = true;
+	}
 	//ボタンを押す判定
 	if (m_isPushScreen)
 	{
-		//制限時間を設定
+		//フェイントを起こさない
+		m_isFeint = false;
+		//経過時間
 		m_time++;
 
 		//押せた場合
-		if (padState & PAD_INPUT_2)//////////////ここからボタンを押してリザルト画面と秒数表示
+		if (padState & PAD_INPUT_2)
 		{
 			return(new SceneGameClearResult);
 		}
@@ -78,15 +98,33 @@ SceneBase* SceneMain::update()
 			return(new SceneGameOverResult);
 		}
 	}
+	//フィントに掛かった場合
+	if (m_isFeint)
+	{
+		//時間経過
+		m_feintTime++;
+
+		if (padState & PAD_INPUT_2)
+		{
+			return(new SceneGameOverResult);
+		}
+		//引っかからなかった場合
+		if (m_feintTime >= kFeintTimeHelp)
+		{
+			m_isFeint = false;
+			m_isWait = true;
+		}
+	}
 
 	return this;
 }
 
 void SceneMain::draw()
 {
-	DrawFormatString(0, 200, GetColor(255, 255, 255), "NowRand%d", m_justTime);
-	DrawFormatString(0, 250, GetColor(255, 255, 255), "NowTime%d", m_time);
-	DrawFormatString(0, 300, GetColor(255, 255, 255), "焦ってボタン押している回数%d", m_buttonClick);
+#if false
+	//乱数を表示
+	DrawFormatString(0, 200, GetColor(kColorWhite, kColorWhite, kColorWhite), "NowRand%d", m_justTime);
+#endif
 
 	//明るさ変更
 	SetDrawBright(m_fadeIn, m_fadeIn, m_fadeIn);
@@ -94,27 +132,36 @@ void SceneMain::draw()
 	if (m_isWait)
 	{
 		//テキスト表示
-		DrawString(Game::kScreenWidth / 2 - 50, Game::kScreenHeight / 2, "まだ押すな！", GetColor(255, 255, 255));
+		DrawString(Game::kScreenWidth / 2 - 50, Game::kScreenHeight / 2, "まだ押すな！", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	}
+
+	if (m_isFeint)
+	{
+		DrawCircle(Game::kScreenWidth / 2, Game::kScreenHeight / 2, m_sphereSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
+		DrawString(Game::kScreenWidth / 2 - 60, Game::kScreenHeight / 2, "今は！押すな！", GetColor(kColorWhite, kColorWhite, kColorWhite));
+		m_isWait = false;
 	}
 
 	//明るさ変更
-	SetDrawBright(255, 255, 255);
-
+	SetDrawBright(kColorWhite, kColorWhite, kColorWhite);
+	//ボタンを早くに押してしまったら表示
 	if (m_isMissText)
 	{
 		m_fadeOut--;
 		SetDrawBright(m_fadeOut, m_fadeOut, m_fadeOut);
-		DrawString(100, 100, "焦るな！まだだ…", GetColor(255, 255, 255));
-		SetDrawBright(255, 255, 255);
+		DrawString(100, 100, "焦るな！まだだ…", GetColor(kColorWhite, kColorWhite, kColorWhite));
+		SetDrawBright(kColorWhite, kColorWhite, kColorWhite);
 	}
-
+	//押すタイミングでわかりやすくカラフルに光る円を表示
 	if (m_isPushScreen)
 	{
 		//円を表示
 		DrawCircle(Game::kScreenWidth / 2, Game::kScreenHeight / 2, m_sphereSize, GetColor(GetRand(255), GetRand(255), GetRand(255)), false);
-		DrawString(Game::kScreenWidth / 2 - 40, Game::kScreenHeight / 2, "今だ押せ！", GetColor(255, 255, 255));
+		DrawString(Game::kScreenWidth / 2 - 40, Game::kScreenHeight / 2, "今だ押せ！", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	}
 
 	//テキスト表示中
-	DrawString(0, 0, "メイン画面表示中", GetColor(255, 255, 255));
+	DrawString(0, 0, "メイン画面表示中", GetColor(kColorWhite, kColorWhite, kColorWhite));
+
+	DrawString(Game::kScreenHeight - 100, 0, "メニュー画面に戻るには＜ X ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
 }
