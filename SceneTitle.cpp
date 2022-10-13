@@ -19,12 +19,12 @@ void SceneTitle::init()
 SceneBase* SceneTitle::update()
 {
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-	//早押しゲームボタン
+	//SpeedPush
 	if (padState & PAD_INPUT_1)
 	{
 		return(new SceneMain);
 	}
-	//（追加）
+	//IceSpin
 	if (padState & PAD_INPUT_2)
 	{
 		return (new ScenePlayer);
@@ -41,10 +41,13 @@ SceneBase* SceneTitle::update()
 
 void SceneTitle::draw()
 {
+	//フォント変更
+	ChangeFont("MS UI Gothic");
+
 	DrawString(0, 0, "タイトル画面", GetColor(kColorWhite, kColorWhite, kColorWhite));
-	DrawString(Game::kScreenWidth / 2 - 170, Game::kScreenHeight / 2 ,          "ゲームルールを確認するには　＜ ↑ ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
-	DrawString(Game::kScreenWidth / 2 - 170, Game::kScreenHeight / 2 - 30,      "Player                    ＜ B ＞  ", GetColor(kColorWhite, kColorWhite, kColorWhite));
-	DrawString(Game::kScreenWidth / 2 - 170, Game::kScreenHeight / 2 - 50,      "早押しゲームをプレイは　　　＜ A ＞　", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	DrawString(Game::kScreenWidth / 2 - 170, Game::kScreenHeight / 2 - 50,"SpeedPushをプレイは ＜ A ＞　", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	DrawString(Game::kScreenWidth / 2 - 170, Game::kScreenHeight / 2 - 30,"IceSpin  をプレイは ＜ B ＞  ", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	DrawString(Game::kScreenWidth / 2 - 170, Game::kScreenHeight / 2 + 40,"これらのゲームルールを確認するには　＜ ↑ ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	//PCの場合
 	//DrawString(Game::kScreenWidth / 2 - 80, Game::kScreenHeight - 100, "< s　p　a　c　e >", GetColor(255, 255, 255));
 }
