@@ -128,6 +128,8 @@ void SceneMain::draw()
 	//テキスト表示中
 	DrawString(0, 0, "＜ S p e e d P u s h ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
 
+	DrawString(Game::kScreenWidth - 250,20, "＜ B ＞で早押し！", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	DrawString(Game::kScreenWidth - 250, 0, "メニュー画面に戻るには＜ X ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	//明るさ変更
 	SetDrawBright(m_fadeIn, m_fadeIn, m_fadeIn);
 
@@ -161,6 +163,4 @@ void SceneMain::draw()
 		DrawCircle(Game::kScreenWidth / 2, Game::kScreenHeight / 2, m_sphereSize, GetColor(GetRand(255), GetRand(255), GetRand(255)), false);
 		DrawString(Game::kScreenWidth / 2 - 40, Game::kScreenHeight / 2, "今だ押せ！", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	}
-
-	DrawString(Game::kScreenWidth - 250, 0, "メニュー画面に戻るには＜ X ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
 }
