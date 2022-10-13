@@ -30,33 +30,32 @@ void SceneMain::init()
 	m_isMissText = false;
 	m_isFeint = false;
 
-	m_fadeIn = 0;	//色を変更
-	m_fadeOut = 0;
-	m_justTime = 0;	//乱数を代入
-	m_sphereSize = 100;	//球体のサイズを変更
-	m_time = 0;	//制限時間をカウント
-	m_feintTime = 0; //フェイント時間をカウント
-	m_buttonClick = 0;	//クリック回数をカウント
+	m_fadeIn = 0.0f;	//色を変更
+	m_fadeOut = 0.0f;
+	m_justTime = 0.0f;	//乱数を代入
+	m_sphereSize = 100.0f;	//球体のサイズを変更
+	m_time = 0.0f;	//制限時間をカウント
+	m_feintTime = 0.0f; //フェイント時間をカウント
+	m_buttonClick = 0.0f;	//クリック回数をカウント
 }
 
 SceneBase* SceneMain::update()
 {
 	//文字の明るさ変更フェードイン
-	if (m_fadeIn >= 0)
+	if (m_fadeIn >= 0.0f)
 	{
 		m_fadeIn++;
-
 	}
-	if (m_fadeIn >= 255)
+	if (m_fadeIn >= 255.0f)
 	{
-		m_fadeIn = 40;
+		m_fadeIn = 40.0f;
 	}
 
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 	if (padState & PAD_INPUT_2)
 	{
 		m_isMissText = true;
-		m_fadeOut = 255;
+		m_fadeOut = 255.0f;
 	}
 	
 	if (padState & PAD_INPUT_3)

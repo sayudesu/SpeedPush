@@ -6,7 +6,7 @@
 #include "SceneGameClearResult.h"
 #include "SceneGameOverResult.h"
 #include "SceneRuleTable.h"
-#include "ScenePlayer.h"
+#include "SceneIceSpein.h"
 
 SceneManager::SceneManager()
 {
@@ -38,8 +38,8 @@ void SceneManager::init(SceneKind kind)
 	case SceneManager::kSceneKindRuleTable:
 		m_pScene = new SceneRuleTable;
 		break;
-	case SceneManager::kSceneKindPlayer:
-		m_pScene = new ScenePlayer;
+	case SceneManager::kSceneKindSceneIceSpein:
+		m_pScene = new SceneIceSpein;
 		break;
 	case SceneManager::kSceneKindNum:
 	default:

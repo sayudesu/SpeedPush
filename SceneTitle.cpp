@@ -1,6 +1,6 @@
 #include "SceneTitle.h"
 #include "SceneMain.h"
-#include "ScenePlayer.h"
+#include "SceneIceSpein.h"
 #include "SceneRuleTable.h"
 #include "DxLib.h"
 #include "game.h"
@@ -27,7 +27,7 @@ SceneBase* SceneTitle::update()
 	//IceSpin
 	if (padState & PAD_INPUT_2)
 	{
-		return (new ScenePlayer);
+		return (new SceneIceSpein);
 	}
 	//ルール確認ボタン
 	if (padState & PAD_INPUT_UP)

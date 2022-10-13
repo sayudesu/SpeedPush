@@ -33,17 +33,17 @@ private:
 
 	bool m_isMissText;
 
-	int m_fadeIn;
+	float m_fadeIn;
 
-	int m_fadeOut;
+	float m_fadeOut;
 
-	int m_justTime;
+	float m_justTime;
 
-	int m_sphereSize;
+	float m_sphereSize;
 
-	int m_time;
+	float m_time;
 
-	int m_feintTime;
+	float m_feintTime;
 
-	int m_buttonClick;
+	float m_buttonClick;
 };
