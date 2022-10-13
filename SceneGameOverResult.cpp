@@ -7,7 +7,7 @@ namespace
 {
 	//•¶š‚Ì‘å‚«‚³
 	constexpr int kTextSise = 54;
-	constexpr int kTextSiseMin = 17;
+	constexpr int kTextSiseMin = 16;
 	//Fw’è
 	constexpr int kColorWhite = 255;
 }

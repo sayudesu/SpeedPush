@@ -126,6 +126,9 @@ void SceneMain::draw()
 	DrawFormatString(0, 200, GetColor(kColorWhite, kColorWhite, kColorWhite), "NowRand%d", m_justTime);
 #endif
 
+	//テキスト表示中
+	DrawString(0, 0, "＜ S p e e d P u s h ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
+
 	//明るさ変更
 	SetDrawBright(m_fadeIn, m_fadeIn, m_fadeIn);
 
@@ -149,7 +152,7 @@ void SceneMain::draw()
 	{
 		m_fadeOut--;
 		SetDrawBright(m_fadeOut, m_fadeOut, m_fadeOut);
-		DrawString(100, 100, "焦るな！まだだ…", GetColor(kColorWhite, kColorWhite, kColorWhite));
+		DrawString(300, 300, "焦るな！まだだ…", GetColor(kColorWhite, kColorWhite, kColorWhite));
 		SetDrawBright(kColorWhite, kColorWhite, kColorWhite);
 	}
 	//押すタイミングでわかりやすくカラフルに光る円を表示
@@ -160,8 +163,5 @@ void SceneMain::draw()
 		DrawString(Game::kScreenWidth / 2 - 40, Game::kScreenHeight / 2, "今だ押せ！", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	}
 
-	//テキスト表示中
-	DrawString(0, 0, "メイン画面表示中", GetColor(kColorWhite, kColorWhite, kColorWhite));
-
-	DrawString(Game::kScreenHeight - 100, 0, "メニュー画面に戻るには＜ X ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	DrawString(Game::kScreenWidth - 250, 0, "メニュー画面に戻るには＜ X ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
 }
