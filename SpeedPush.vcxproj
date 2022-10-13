@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ScenePlayer.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="SceneGameClearResult.cpp" />
     <ClCompile Include="SceneGameOverResult.cpp" />
@@ -173,6 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
+    <ClInclude Include="ScenePlayer.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SceneGameClearResult.h" />
     <ClInclude Include="SceneGameOverResult.h" />

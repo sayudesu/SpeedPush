@@ -14,6 +14,7 @@ public:
 		kSceneKindGameClearResult,
 		kSceneKindGameOverResult,
 		kSceneKindRuleTable,
+		kSceneKindPlayer,
 
 		kSceneKindNum
 	}SceneKind;

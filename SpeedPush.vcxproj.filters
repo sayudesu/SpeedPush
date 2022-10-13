@@ -19,6 +19,12 @@
     <Filter Include="ヘッダー ファイル\Scenes">
       <UniqueIdentifier>{5d314efc-16f5-4e40-8b5a-d97ec270325b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Scenes\SpeedPush">
+      <UniqueIdentifier>{ce77c7d8-d406-4908-85e1-98b6b3aac664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scenes\SpeedPush">
+      <UniqueIdentifier>{4dc7c4aa-36ba-4b82-b2e7-75a7c4ef51a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -33,15 +39,6 @@
     <ClCompile Include="SceneBase.cpp">
       <Filter>ソース ファイル\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGameClearResult.cpp">
-      <Filter>ソース ファイル\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGameOverResult.cpp">
-      <Filter>ソース ファイル\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
-      <Filter>ソース ファイル\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>ソース ファイル\Scenes</Filter>
     </ClCompile>
@@ -50,6 +47,18 @@
     </ClCompile>
     <ClCompile Include="SceneTitle.cpp">
       <Filter>ソース ファイル\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameClearResult.cpp">
+      <Filter>ソース ファイル\Scenes\SpeedPush</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameOverResult.cpp">
+      <Filter>ソース ファイル\Scenes\SpeedPush</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>ソース ファイル\Scenes\SpeedPush</Filter>
+    </ClCompile>
+    <ClCompile Include="ScenePlayer.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,15 +74,6 @@
     <ClInclude Include="SceneBase.h">
       <Filter>ヘッダー ファイル\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="SceneGameClearResult.h">
-      <Filter>ヘッダー ファイル\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGameOverResult.h">
-      <Filter>ヘッダー ファイル\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ヘッダー ファイル\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>ヘッダー ファイル\Scenes</Filter>
     </ClInclude>
@@ -82,6 +82,18 @@
     </ClInclude>
     <ClInclude Include="SceneTitle.h">
       <Filter>ヘッダー ファイル\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameClearResult.h">
+      <Filter>ヘッダー ファイル\Scenes\SpeedPush</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameOverResult.h">
+      <Filter>ヘッダー ファイル\Scenes\SpeedPush</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMain.h">
+      <Filter>ヘッダー ファイル\Scenes\SpeedPush</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenePlayer.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

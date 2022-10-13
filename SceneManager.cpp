@@ -6,6 +6,7 @@
 #include "SceneGameClearResult.h"
 #include "SceneGameOverResult.h"
 #include "SceneRuleTable.h"
+#include "ScenePlayer.h"
 
 SceneManager::SceneManager()
 {
@@ -36,6 +37,9 @@ void SceneManager::init(SceneKind kind)
 		break;
 	case SceneManager::kSceneKindRuleTable:
 		m_pScene = new SceneRuleTable;
+		break;
+	case SceneManager::kSceneKindPlayer:
+		m_pScene = new ScenePlayer;
 		break;
 	case SceneManager::kSceneKindNum:
 	default:
