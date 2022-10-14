@@ -21,7 +21,7 @@ namespace
 	constexpr float kPlayerSize = 35.0f;
 
 	//円のサイズ
-	constexpr float kSphereSize = 300;
+	constexpr float kSphereSize = 300.0f;
 
 	//虹色の円が広がるスピード
 	constexpr float kSphereSpeed = 1.0f;
@@ -38,6 +38,14 @@ void SceneIceSpein::init()
 {
 	m_isDelete = true;
 
+	m_isUpSide = false;
+
+	m_isDownSide = false;
+
+	m_isRightSide = false;
+
+	m_isLeftSide = false;
+
 	m_hPlayerGraphic = -1;
 	m_hEnemyGraphic = -1;
 	m_hMapGraphic = -1;
@@ -46,7 +54,7 @@ void SceneIceSpein::init()
 	m_hEnemyGraphic = LoadGraph("data/azarasi.png");
 	m_hMapGraphic = LoadGraph("data/umi.jpg");
 
-	m_Position = -1;
+	m_Position = 0;
 	m_count = 0;
 
 	m_SphereSizeX = Game::kScreenWidth  / 2.0f;
@@ -71,31 +79,78 @@ void SceneIceSpein::init()
 	m_CenterEnemySize = 0.0f;
 	m_CenterEnemyMatch = 0.0f;
 
-	m_pos.x = Game::kScreenWidth / 2.0f - 30;
-	m_pos.y = Game::kScreenHeight / 2.0f - 30;
+	m_pos.x = Game::kScreenWidth / 2.0f - 30.0f;
+	m_pos.y = Game::kScreenHeight / 2.0f - 30.0f;
 	
 	m_vec.x = 0.0f;
 	m_vec.y = 0.0f;
 
-	m_enemyPos.x = Game::kScreenWidth;
-	m_enemyPos.y = Game::kScreenHeight / 2;
+	m_enemyPos.x = 0.0f;
+	m_enemyPos.y = 0.0f;
 }
 
 SceneBase* SceneIceSpein::update()
 {
 	m_count++;
 	
-	if (m_count == 100)
+	if (m_count >= 500.0f)
 	{
-		m_Position = GetRand(3);
+		m_Position = GetRand(3.0f);
 		m_count = 0;
 	}
 	
-	if (m_Position == 0)
+	if (m_Position == 0.0f)
 	{
-		m_enemyPos.x -= kEnemySpeed;
+		m_isRightSide = true;
+		DrawString(0, 100, "右から", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	} 
+	else if (m_Position == 1.0f)
+	{
+		m_isLeftSide = true;
+		DrawString(0, 100, "左から", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	}
+	else if (m_Position == 2.0f)
+	{	
+		m_isUpSide = true;	
+		DrawString(0, 100, "上から", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	}
+	else if (m_Position == 3.0f)
+	{
+		m_isDownSide = true;
+		DrawString(0, 100, "下から", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	}
 
+	if (m_isRightSide)	
+	{
+		m_enemyPos.x = Game::kScreenWidth;
+		m_enemyPos.y = Game::kScreenHeight / 2.0f;
+
+		m_enemyPos.x -= kEnemySpeed;
+	}
+	else if (m_isLeftSide)
+	{
+		m_enemyPos.x = 0.0f;
+		m_enemyPos.y = Game::kScreenHeight / 2.0f;
+
+		m_enemyPos.x += kEnemySpeed;
+	}
+	else if (m_isUpSide)
+	{
+		m_enemyPos.x = Game::kScreenWidth / 2.0f;
+		m_enemyPos.y = 0.0f;
+
+		m_enemyPos.y += kEnemySpeed;
+	}
+	else if (m_isDownSide)
+	{
+		m_enemyPos.x = Game::kScreenWidth / 2.0f;
+		m_enemyPos.y = Game::kScreenHeight;
+
+		m_enemyPos.y -= kEnemySpeed;
+	}
+	
+
+	//m_enemyPos.x -= kEnemySpeed;
 
 	//円の広がるスピード
 	SphereSizeUp += kSphereSpeed;
@@ -168,15 +223,12 @@ void SceneIceSpein::draw()
 
 	//プレイヤーを表示&円
 	DrawGraph(m_pos.x,m_pos.y, m_hPlayerGraphic, true);
-	DrawCircle(m_PlayerSizeX + 40, m_PlayerSizeY + 40, kPlayerSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
+	DrawCircle(m_PlayerSizeX + 40.0f, m_PlayerSizeY + 40.0f, kPlayerSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
 
-
-	//エネミー表示
-	//DrawGraph(m_enemyPos.x, m_enemyPos.x, m_hEnemyGraphic, true);
 	if (m_isDelete)
 	{
 		DrawRotaGraph(m_enemyPos.x, m_enemyPos.y, 1.0f, 0.0f, m_hEnemyGraphic, true, false);
-		//DrawCircle(m_enemyPos.x, m_enemyPos.y, m_hEnemyGraphic, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
+	//	DrawCircle(m_enemyPos.x, m_enemyPos.y, m_hEnemyGraphic, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
 	}
 }
 

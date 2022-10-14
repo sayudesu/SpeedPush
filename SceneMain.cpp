@@ -8,7 +8,7 @@
 namespace
 {
 	//数字合わせ最大数
-	constexpr int kTimeRand = 1000;//1000
+	constexpr float kTimeRand = 1000.0f;//1000
 	//数字合わせ正解数
 	constexpr int kTimeStop = 500;//500
 	//フェイント用の数字

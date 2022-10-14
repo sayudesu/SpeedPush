@@ -29,6 +29,15 @@ private:
 	bool m_isEnd;
 
 	bool m_isDelete;
+
+	bool m_isUpSide;
+
+	bool m_isDownSide;
+
+	bool m_isRightSide;
+
+	bool m_isLeftSide;
+
 	//プレイヤーのグラフィックハンドル
 	int m_hPlayerGraphic;
 	//エネミーのグラフィックハンドル
