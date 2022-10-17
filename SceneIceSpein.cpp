@@ -56,14 +56,13 @@ void SceneIceSpein::init()
 
 	m_Position = 0;
 	m_count = 0;
+	m_EnemyMoveCount = 0;
 
-	m_SphereSizeX = Game::kScreenWidth  / 2.0f;
+	m_SphereSizeX = Game::kScreenWidth / 2.0f;
 	m_SphereSizeY = Game::kScreenHeight / 2.0f;
 
 	SphereSizeUp = 100.0f;
 
-	m_PlayerSizeX = m_pos.x;
-	m_PlayerSizeY = m_pos.y;
 
 	m_GetHitX = 0.0f;
 	m_GetHitY = 0.0f;
@@ -81,105 +80,94 @@ void SceneIceSpein::init()
 
 	m_pos.x = Game::kScreenWidth / 2.0f - 30.0f;
 	m_pos.y = Game::kScreenHeight / 2.0f - 30.0f;
-	
+
 	m_vec.x = 0.0f;
 	m_vec.y = 0.0f;
-
+	/*
 	m_enemyPos.x = 0.0f;
 	m_enemyPos.y = 0.0f;
+	*/
+	m_PlayerSizeX = m_pos.x;
+	m_PlayerSizeY = m_pos.y;
+
+	m_enemyPos.x = Game::kScreenWidth - 10;
+	m_enemyPos.y = Game::kScreenHeight / 2;
+
+	m_TestNum_X = 0.0f;
+	m_TestNum_Y = 0.0f;
 }
 
 SceneBase* SceneIceSpein::update()
 {
-	m_count++;
-	
-	if (m_count >= 500.0f)
-	{
-		m_Position = GetRand(3.0f);
-		m_count = 0;
-	}
-	
-	if (m_Position == 0.0f)
-	{
-		m_isRightSide = true;
-		DrawString(0, 100, "右から", GetColor(kColorWhite, kColorWhite, kColorWhite));
-	} 
-	else if (m_Position == 1.0f)
-	{
-		m_isLeftSide = true;
-		DrawString(0, 100, "左から", GetColor(kColorWhite, kColorWhite, kColorWhite));
-	}
-	else if (m_Position == 2.0f)
-	{	
-		m_isUpSide = true;	
-		DrawString(0, 100, "上から", GetColor(kColorWhite, kColorWhite, kColorWhite));
-	}
-	else if (m_Position == 3.0f)
-	{
-		m_isDownSide = true;
-		DrawString(0, 100, "下から", GetColor(kColorWhite, kColorWhite, kColorWhite));
-	}
+	m_TestNum_X = m_vec.x;
+	m_TestNum_Y = m_vec.y;
 
-	if (m_isRightSide)	
+	if (m_isDelete)
 	{
-		m_enemyPos.x = Game::kScreenWidth;
-		m_enemyPos.y = Game::kScreenHeight / 2.0f;
+		m_EnemyMoveCount++;
 
-		m_enemyPos.x -= kEnemySpeed;
-	}
-	else if (m_isLeftSide)
-	{
-		m_enemyPos.x = 0.0f;
-		m_enemyPos.y = Game::kScreenHeight / 2.0f;
+		if (m_vec.x >= m_TestNum_X)
+		{
+			m_enemyPos.x += m_TestNum_X;
+			m_enemyPos.x -= 5.0f;
+			
+			if (m_pos.x  >= m_enemyPos.x )
+			{
+				m_enemyPos.x -= 10.0f;
+			}
+			
+		}
+		if (m_vec.y >= m_TestNum_Y)
+		{
+			if (m_EnemyMoveCount >= 3)
+			{
+				m_enemyPos.y += m_TestNum_Y;
+				m_EnemyMoveCount = 0;
+			}
+		}
 
-		m_enemyPos.x += kEnemySpeed;
-	}
-	else if (m_isUpSide)
-	{
-		m_enemyPos.x = Game::kScreenWidth / 2.0f;
-		m_enemyPos.y = 0.0f;
-
-		m_enemyPos.y += kEnemySpeed;
-	}
-	else if (m_isDownSide)
-	{
-		m_enemyPos.x = Game::kScreenWidth / 2.0f;
-		m_enemyPos.y = Game::kScreenHeight;
-
-		m_enemyPos.y -= kEnemySpeed;
 	}
 	
-
-	//m_enemyPos.x -= kEnemySpeed;
-
 	//円の広がるスピード
 	SphereSizeUp += kSphereSpeed;
-
+	
 	//プレイヤーの位置を取得
 	m_PlayerSizeX = m_pos.x;
 	m_PlayerSizeY = m_pos.y;
-
+	
 	//移動キー
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 	if (padState & PAD_INPUT_UP)
 	{
 		m_vec.y -= kAcc;
-		if (m_vec.y < -kSpeedMax)	m_vec.y = -kSpeedMax;
+		if (m_vec.y < -kSpeedMax)
+		{
+			m_vec.y = -kSpeedMax;
+		}
 	}
-	if (padState & PAD_INPUT_DOWN)
+	else if (padState & PAD_INPUT_DOWN)
 	{
 		m_vec.y += kAcc;
-		if (m_vec.y > kSpeedMax)	m_vec.y = kSpeedMax;
+		if (m_vec.y > kSpeedMax)
+		{
+			m_vec.y = kSpeedMax;
+		}
 	}
-	if (padState & PAD_INPUT_LEFT)
+	else if (padState & PAD_INPUT_LEFT)
 	{
 		m_vec.x -= kAcc;
-		if (m_vec.x < -kSpeedMax)	m_vec.x = -kSpeedMax;
+		if (m_vec.x < -kSpeedMax)
+		{
+			m_vec.x = -kSpeedMax;
+		}
 	}
-	if (padState & PAD_INPUT_RIGHT)
+	else if (padState & PAD_INPUT_RIGHT)
 	{
 		m_vec.x += kAcc;
-		if (m_vec.x > kSpeedMax)	m_vec.x = kSpeedMax;
+		if (m_vec.x > kSpeedMax)
+		{
+			m_vec.x = kSpeedMax;
+		}
 	}
 	m_pos += m_vec;
 	

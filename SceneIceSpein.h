@@ -47,6 +47,8 @@ private:
 	//ランダム
 	int m_Position;
 	int m_count;
+	//敵の動きを設定
+	int m_EnemyMoveCount;
 	//円のサイズ
 	float m_SphereSizeX;
 	float m_SphereSizeY;
@@ -67,6 +69,9 @@ private:
 	float m_GetEnemyHit;
 	float m_CenterEnemySize;
 	float m_CenterEnemyMatch;
+
+	float m_TestNum_X;
+	float m_TestNum_Y;
 
 	Vec2 m_pos;
 	Vec2 m_vec;
