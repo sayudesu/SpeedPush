@@ -55,7 +55,7 @@ void SceneIceSpein::init()
 	m_hMapGraphic = LoadGraph("data/umi.jpg");
 
 	m_Position = 0;
-	m_count = 0;
+	m_count = 70;
 	m_EnemyMoveCount = 0;
 
 	m_SphereSizeX = Game::kScreenWidth / 2.0f;
@@ -83,16 +83,20 @@ void SceneIceSpein::init()
 
 	m_vec.x = 0.0f;
 	m_vec.y = 0.0f;
-	/*
+
 	m_enemyPos.x = 0.0f;
 	m_enemyPos.y = 0.0f;
+
+	/*
+	m_enemyPos.x = 0.0f;
+	m_enemyPos.y = Game::kScreenHeight / 2;
 	*/
 	m_PlayerSizeX = m_pos.x;
 	m_PlayerSizeY = m_pos.y;
-
+	/*
 	m_enemyPos.x = Game::kScreenWidth - 10;
 	m_enemyPos.y = Game::kScreenHeight / 2;
-
+	*/
 	m_TestNum_X = 0.0f;
 	m_TestNum_Y = 0.0f;
 }
@@ -101,31 +105,70 @@ SceneBase* SceneIceSpein::update()
 {
 	m_TestNum_X = m_vec.x;
 	m_TestNum_Y = m_vec.y;
+	
+	m_count++;
+
+	if (m_count >= 70)
+	{
+		m_Position = GetRand(1);
+		m_count = 0;
+	}
 
 	if (m_isDelete)
 	{
 		m_EnemyMoveCount++;
-
-		if (m_vec.x >= m_TestNum_X)
+		//右から
+		if (m_Position == 0)
 		{
-			m_enemyPos.x += m_TestNum_X;
-			m_enemyPos.x -= 5.0f;
-			
-			if (m_pos.x  >= m_enemyPos.x )
-			{
-				m_enemyPos.x -= 10.0f;
-			}
-			
-		}
-		if (m_vec.y >= m_TestNum_Y)
-		{
-			if (m_EnemyMoveCount >= 3)
-			{
-				m_enemyPos.y += m_TestNum_Y;
-				m_EnemyMoveCount = 0;
-			}
-		}
+			m_enemyPos.x = Game::kScreenWidth - 10;
+			m_enemyPos.y = Game::kScreenHeight / 2;
 
+			if (m_vec.x >= m_TestNum_X)
+			{
+				m_enemyPos.x += m_TestNum_X;
+				m_enemyPos.x -= 5.0f;
+
+				if (m_pos.x >= m_enemyPos.x)
+				{
+					m_enemyPos.x -= 10.0f;
+				}
+
+			}
+			if (m_vec.y >= m_TestNum_Y)
+			{
+				if (m_EnemyMoveCount >= 3)
+				{
+					m_enemyPos.y += m_TestNum_Y;
+					m_EnemyMoveCount = 0;
+				}
+			}
+		}
+		//左から
+		if (m_Position == 1)
+		{
+			m_enemyPos.x = 0.0f;
+			m_enemyPos.y = Game::kScreenHeight / 2;
+
+			if (m_vec.x >= m_TestNum_X)
+			{
+				m_enemyPos.x -= m_TestNum_X;
+				m_enemyPos.x += 5.0f;
+				/*
+				if (m_pos.x >= m_enemyPos.x)
+				{
+					m_enemyPos.x += 10.0f;
+				}
+				*/
+			}
+			if (m_vec.y >= m_TestNum_Y)
+			{
+				if (m_EnemyMoveCount >= 3)
+				{
+					m_enemyPos.y += m_TestNum_Y;
+					m_EnemyMoveCount = 0;
+				}
+			}
+		}
 	}
 	
 	//円の広がるスピード
