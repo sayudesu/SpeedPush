@@ -22,6 +22,7 @@ public:
 
 	virtual bool CheckHit();
 	virtual bool CheckHitEnemy();
+	virtual bool CheckHitEnemyBird();
 
 	virtual bool isEnd() { return m_isEnd; }
 private:
@@ -29,6 +30,8 @@ private:
 	bool m_isEnd;
 
 	bool m_isDelete;
+
+	bool m_isBirdDelete;
 
 	bool m_isUpSide;
 
@@ -38,14 +41,16 @@ private:
 
 	bool m_isLeftSide;
 
+	bool m_isTracking;
+
 	//プレイヤーのグラフィックハンドル
 	int m_hPlayerGraphic;
 	//エネミーのグラフィックハンドル
 	int m_hEnemyGraphic;
+	int m_hEnemyBirdGraphic;
 	//マップのグラフィックハンドル
 	int m_hMapGraphic;
 	//ランダム
-	int m_Position;
 	int m_count;
 	//敵の動きを設定
 	int m_EnemyMoveCount;
@@ -69,6 +74,15 @@ private:
 	float m_GetEnemyHit;
 	float m_CenterEnemySize;
 	float m_CenterEnemyMatch;
+	//当たり判定用　プレイヤーとエネミー
+	float m_GetEnemyBirdHitX;
+	float m_GetEnemyBirdHitY;
+	float m_GetEnemyBirdHit;
+	float m_CenterEnemyBirdSize;
+	float m_CenterEnemyBirdMatch;
+
+	float m_PositionSide;
+	float m_PositionUpSide;
 
 	float m_TestNum_X;
 	float m_TestNum_Y;
@@ -77,4 +91,5 @@ private:
 	Vec2 m_vec;
 
 	Vec2 m_enemyPos;
+	Vec2 m_enemyBirdPos;
 };

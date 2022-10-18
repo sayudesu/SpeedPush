@@ -29,14 +29,20 @@ namespace
 	//円の大きさMax
 	constexpr float kSphereSizeMax = 650.0f;
 
-	//敵のサイズ
-	constexpr float kEnemySpeed = 10.0f;
+	//敵のスピード
+	constexpr float kEnemySpeed = 8.0f;
+	constexpr float kEnemyBirdSpeed = 12.0f;
+
+	//敵の位置変更
+	constexpr float kEnemyPosition = 70;
 
 }
 
 void SceneIceSpein::init()
 {
-	m_isDelete = true;
+	m_isDelete = false;
+
+	m_isBirdDelete = false;
 
 	m_isUpSide = false;
 
@@ -46,16 +52,19 @@ void SceneIceSpein::init()
 
 	m_isLeftSide = false;
 
+	m_isTracking = false;
+
 	m_hPlayerGraphic = -1;
 	m_hEnemyGraphic = -1;
+	m_hEnemyBirdGraphic = -1;
 	m_hMapGraphic = -1;
 	//グラフィックのロード
 	m_hPlayerGraphic = LoadGraph("data/pengin.png");
 	m_hEnemyGraphic = LoadGraph("data/azarasi.png");
 	m_hMapGraphic = LoadGraph("data/umi.jpg");
+	m_hEnemyBirdGraphic = LoadGraph("data/kkamome.png");
 
-	m_Position = 0;
-	m_count = 70;
+	m_count = 0;
 	m_EnemyMoveCount = 0;
 
 	m_SphereSizeX = Game::kScreenWidth / 2.0f;
@@ -78,6 +87,17 @@ void SceneIceSpein::init()
 	m_CenterEnemySize = 0.0f;
 	m_CenterEnemyMatch = 0.0f;
 
+    m_GetEnemyBirdHitX = 0.0f;
+	m_GetEnemyBirdHitY = 0.0f;
+	m_GetEnemyBirdHit = 0.0f;
+
+	m_CenterEnemyBirdSize = 0.0f;
+	m_CenterEnemyBirdMatch = 0.0f;
+
+
+	m_PositionSide = 0.0f;
+	m_PositionUpSide = 0.0f;
+
 	m_pos.x = Game::kScreenWidth / 2.0f - 30.0f;
 	m_pos.y = Game::kScreenHeight / 2.0f - 30.0f;
 
@@ -93,82 +113,42 @@ void SceneIceSpein::init()
 	*/
 	m_PlayerSizeX = m_pos.x;
 	m_PlayerSizeY = m_pos.y;
-	/*
-	m_enemyPos.x = Game::kScreenWidth - 10;
-	m_enemyPos.y = Game::kScreenHeight / 2;
-	*/
-	m_TestNum_X = 0.0f;
-	m_TestNum_Y = 0.0f;
+	
+	m_enemyPos.y = 0.0f;
+	m_enemyPos.x = 0.0f;
+
+	m_enemyBirdPos.x = 0.0f;
+	m_enemyBirdPos.y = 0.0f;
+
 }
 
 SceneBase* SceneIceSpein::update()
 {
-	m_TestNum_X = m_vec.x;
-	m_TestNum_Y = m_vec.y;
-	
-	m_count++;
-
-	if (m_count >= 70)
+	if (!m_isDelete)
 	{
-		m_Position = GetRand(1);
-		m_count = 0;
+		m_PositionSide = GetRand(Game::kScreenHeight);
+		m_enemyPos.x = Game::kScreenWidth;
+		m_enemyPos.y = m_PositionSide -= 70.0f ;
+		m_isDelete = true;
 	}
-
 	if (m_isDelete)
 	{
-		m_EnemyMoveCount++;
-		//右から
-		if (m_Position == 0)
-		{
-			m_enemyPos.x = Game::kScreenWidth - 10;
-			m_enemyPos.y = Game::kScreenHeight / 2;
+		m_enemyPos.y = m_PositionSide;
+		m_enemyPos.x -= kEnemySpeed;
+	}
 
-			if (m_vec.x >= m_TestNum_X)
-			{
-				m_enemyPos.x += m_TestNum_X;
-				m_enemyPos.x -= 5.0f;
+	if (!m_isBirdDelete)
+	{
+		m_PositionUpSide = GetRand(Game::kScreenWidth);
+		m_enemyBirdPos.x = m_PositionUpSide;
+		m_enemyBirdPos.y = 0.0f;
 
-				if (m_pos.x >= m_enemyPos.x)
-				{
-					m_enemyPos.x -= 10.0f;
-				}
-
-			}
-			if (m_vec.y >= m_TestNum_Y)
-			{
-				if (m_EnemyMoveCount >= 3)
-				{
-					m_enemyPos.y += m_TestNum_Y;
-					m_EnemyMoveCount = 0;
-				}
-			}
-		}
-		//左から
-		if (m_Position == 1)
-		{
-			m_enemyPos.x = 0.0f;
-			m_enemyPos.y = Game::kScreenHeight / 2;
-
-			if (m_vec.x >= m_TestNum_X)
-			{
-				m_enemyPos.x -= m_TestNum_X;
-				m_enemyPos.x += 5.0f;
-				/*
-				if (m_pos.x >= m_enemyPos.x)
-				{
-					m_enemyPos.x += 10.0f;
-				}
-				*/
-			}
-			if (m_vec.y >= m_TestNum_Y)
-			{
-				if (m_EnemyMoveCount >= 3)
-				{
-					m_enemyPos.y += m_TestNum_Y;
-					m_EnemyMoveCount = 0;
-				}
-			}
-		}
+		m_isBirdDelete = true;
+	}
+	if (m_isBirdDelete)
+	{
+		m_enemyBirdPos.x = m_PositionUpSide;
+		m_enemyBirdPos.y += kEnemyBirdSpeed;
 	}
 	
 	//円の広がるスピード
@@ -230,6 +210,10 @@ SceneBase* SceneIceSpein::update()
 	{
 		return(new SceneGameOverResult);
 	}
+	if (!CheckHitEnemyBird())
+	{
+		return(new SceneGameOverResult);//Loss
+	}
 
 	//メニューに戻るボタン
 	if (padState & PAD_INPUT_3)
@@ -254,12 +238,16 @@ void SceneIceSpein::draw()
 
 	//プレイヤーを表示&円
 	DrawGraph(m_pos.x,m_pos.y, m_hPlayerGraphic, true);
-	DrawCircle(m_PlayerSizeX + 40.0f, m_PlayerSizeY + 40.0f, kPlayerSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
-
+	//DrawCircle(m_PlayerSizeX + 40.0f, m_PlayerSizeY + 40.0f, kPlayerSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
+	//敵を表示
 	if (m_isDelete)
 	{
 		DrawRotaGraph(m_enemyPos.x, m_enemyPos.y, 1.0f, 0.0f, m_hEnemyGraphic, true, false);
-	//	DrawCircle(m_enemyPos.x, m_enemyPos.y, m_hEnemyGraphic, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
+	}
+	if (m_isBirdDelete)
+	{
+		DrawRotaGraph(m_enemyBirdPos.x, m_enemyBirdPos.y, 1.0f, 0.0f, m_hEnemyBirdGraphic, true, false);
+		DrawCircle(m_enemyBirdPos.x + 40.0f, m_enemyBirdPos.y + 40.0f, kPlayerSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
 	}
 }
 
@@ -269,18 +257,22 @@ void SceneIceSpein::ScreenOut()
 	if (m_enemyPos.x >= Game::kScreenWidth)
 	{
 		m_isDelete = false;
+		m_isBirdDelete = false;
 	}
 	else if (m_enemyPos.x <= 0.0f)
 	{
 		m_isDelete = false;
+		m_isBirdDelete = false;
 	}
 	if (m_enemyPos.y >= Game::kScreenHeight)
 	{
 		m_isDelete = false;
+		m_isBirdDelete = false;
 	}
 	else if (m_enemyPos.y <= 0.0f)
 	{
 		m_isDelete = false;
+		m_isBirdDelete = false;
 	}
 
 }
@@ -313,6 +305,23 @@ bool SceneIceSpein::CheckHitEnemy()
 	m_CenterEnemyMatch = m_CenterEnemySize * m_CenterEnemySize;
 
 	if (m_GetEnemyHit > m_CenterEnemyMatch)
+	{
+		return true;
+	}
+
+	return false;
+}
+bool SceneIceSpein::CheckHitEnemyBird()
+{
+	//当たり判定
+	m_GetEnemyBirdHitX = m_enemyBirdPos.x - m_PlayerSizeX;
+	m_GetEnemyBirdHitY = m_enemyBirdPos.y - m_PlayerSizeY;
+	m_GetEnemyBirdHit = m_GetEnemyBirdHitX * m_GetEnemyBirdHitX + m_GetEnemyBirdHitY * m_GetEnemyBirdHitY;
+
+	m_CenterEnemyBirdSize = kPlayerSize + kPlayerSize;
+	m_CenterEnemyBirdMatch = m_CenterEnemyBirdSize * m_CenterEnemyBirdSize;
+
+	if (m_GetEnemyBirdHit > m_CenterEnemyBirdMatch)
 	{
 		return true;
 	}
