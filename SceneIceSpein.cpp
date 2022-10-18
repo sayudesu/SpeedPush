@@ -67,8 +67,8 @@ void SceneIceSpein::init()
 	m_count = 0;
 	m_EnemyMoveCount = 0;
 
-	m_SphereSizeX = Game::kScreenWidth / 2.0f;
-	m_SphereSizeY = Game::kScreenHeight / 2.0f;
+	m_SphereSizeX = Game::kScreenWidth / 2;
+	m_SphereSizeY = Game::kScreenHeight / 2;
 
 	SphereSizeUp = 100.0f;
 
@@ -95,8 +95,8 @@ void SceneIceSpein::init()
 	m_CenterEnemyBirdMatch = 0.0f;
 
 
-	m_PositionSide = 0.0f;
-	m_PositionUpSide = 0.0f;
+	m_PositionSide = 0;
+	m_PositionUpSide = 0;
 
 	m_pos.x = Game::kScreenWidth / 2.0f - 30.0f;
 	m_pos.y = Game::kScreenHeight / 2.0f - 30.0f;
@@ -128,7 +128,7 @@ SceneBase* SceneIceSpein::update()
 	{
 		m_PositionSide = GetRand(Game::kScreenHeight);
 		m_enemyPos.x = Game::kScreenWidth;
-		m_enemyPos.y = m_PositionSide -= 70.0f ;
+		m_enemyPos.y = m_PositionSide -= 7 ;
 		m_isDelete = true;
 	}
 	if (m_isDelete)
@@ -247,7 +247,7 @@ void SceneIceSpein::draw()
 	if (m_isBirdDelete)
 	{
 		DrawRotaGraph(m_enemyBirdPos.x, m_enemyBirdPos.y, 1.0f, 0.0f, m_hEnemyBirdGraphic, true, false);
-		DrawCircle(m_enemyBirdPos.x + 40.0f, m_enemyBirdPos.y + 40.0f, kPlayerSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
+		DrawCircle(m_enemyBirdPos.x, m_enemyBirdPos.y, kPlayerSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
 	}
 }
 

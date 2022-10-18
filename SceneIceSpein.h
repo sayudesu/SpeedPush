@@ -55,8 +55,8 @@ private:
 	//敵の動きを設定
 	int m_EnemyMoveCount;
 	//円のサイズ
-	float m_SphereSizeX;
-	float m_SphereSizeY;
+	int m_SphereSizeX;
+	int m_SphereSizeY;
 	//円のサイズを大きくする
 	float SphereSizeUp;
 	//プレイヤー当たり判定サイズ
@@ -81,8 +81,8 @@ private:
 	float m_CenterEnemyBirdSize;
 	float m_CenterEnemyBirdMatch;
 
-	float m_PositionSide;
-	float m_PositionUpSide;
+	int m_PositionSide;
+	int m_PositionUpSide;
 
 	float m_TestNum_X;
 	float m_TestNum_Y;
