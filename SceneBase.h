@@ -7,7 +7,6 @@ public:
 	SceneBase() {}
 	virtual ~SceneBase() {}
 
-
 	virtual void init() {}
 	virtual void end() {}
 

@@ -7,7 +7,21 @@ class SceneMain : public SceneBase
 public:
 	SceneMain()
 	{
-		m_isEnd = false;
+		m_isEnd        = false;
+		m_isEnd        = false;
+		m_isWait       = false;
+		m_isPushScreen = false;
+		m_isFeint      = false;
+		m_isKeyPush    = false;
+		m_isMissText   = false;
+
+		m_fadeIn      = 0.0f;
+		m_fadeOut     = 0.0f;
+		m_justTime    = 0.0f;
+		m_sphereSize  = 0.0f;
+		m_time        = 0.0f;
+		m_feintTime   = 0.0f;
+		m_buttonClick = 0.0f;
 	}
 	virtual ~SceneMain() {}
 

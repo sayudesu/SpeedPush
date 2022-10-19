@@ -7,7 +7,49 @@ class SceneIceSpein : public SceneBase
 public:
 	SceneIceSpein()
 	{
-		m_isEnd = false;
+		m_isEnd        = false;
+		m_isDelete     = false;
+		m_isBirdDelete = false;
+		m_isUpSide     = false;
+		m_isDownSide   = false;
+		m_isRightSide  = false;
+		m_isLeftSide   = false;
+		m_isTracking   = false;
+
+		m_hPlayerGraphic    = 0;
+		m_hEnemyGraphic     = 0;
+		m_hEnemyBirdGraphic = 0;
+
+	    m_hMapGraphic    = 0;
+		m_count          = 0;
+		m_EnemyMoveCount = 0;
+		m_SphereSizeX    = 0;
+		m_SphereSizeY    = 0;
+		m_SphereSizeUp = 0.0f;
+		m_PlayerSizeX  = 0.0f;
+		m_PlayerSizeY  = 0.0f;
+
+		m_GetEnemyHitX     = 0.0f;
+		m_GetEnemyHitY     = 0.0f;
+		m_GetEnemyHit      = 0.0f;
+		m_CenterEnemySize  = 0.0f;
+		m_CenterEnemyMatch = 0.0f;
+
+		m_GetEnemyBirdHitX     = 0.0f;
+		m_GetEnemyBirdHitY     = 0.0f;
+		m_GetEnemyBirdHit      = 0.0f;
+		m_CenterEnemyBirdSize  = 0.0f;
+		m_CenterEnemyBirdMatch = 0.0f;
+
+		m_GetHitX     = 0.0f;
+		m_GetHitY     = 0.0f;
+		m_GetHit      = 0.0f;
+		m_CenterSize  = 0.0f;
+		m_CenterMatch = 0.0f;
+
+		m_PositionSide   = 0;
+	    m_PositionUpSide = 0;
+
 	}
 	virtual ~SceneIceSpein(){}
 
@@ -19,6 +61,7 @@ public:
 	virtual void draw();
 
 	virtual void ScreenOut();
+	virtual void ScreenEnemy();
 
 	virtual bool CheckHit();
 	virtual bool CheckHitEnemy();
@@ -58,7 +101,7 @@ private:
 	int m_SphereSizeX;
 	int m_SphereSizeY;
 	//円のサイズを大きくする
-	float SphereSizeUp;
+	float m_SphereSizeUp;
 	//プレイヤー当たり判定サイズ
 	float m_PlayerSizeX;
 	float m_PlayerSizeY;
@@ -83,9 +126,6 @@ private:
 
 	int m_PositionSide;
 	int m_PositionUpSide;
-
-	float m_TestNum_X;
-	float m_TestNum_Y;
 
 	Vec2 m_pos;
 	Vec2 m_vec;

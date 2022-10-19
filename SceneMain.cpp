@@ -8,7 +8,7 @@
 namespace
 {
 	//数字合わせ最大数
-	constexpr float kTimeRand = 1000.0f;//1000
+	constexpr int kTimeRand = 1000;//1000
 	//数字合わせ正解数
 	constexpr int kTimeStop = 500;//500
 	//フェイント用の数字
@@ -64,7 +64,7 @@ SceneBase* SceneMain::update()
 	}
 	
 	//最大数からランダムに数字を代入
-	m_justTime = GetRand(kTimeRand);
+	m_justTime = static_cast<float>(GetRand(kTimeRand));
 	//ランダムに代入された数字と照らし合わせる
 	if (m_justTime == kTimeStop)
 	{
@@ -131,7 +131,7 @@ void SceneMain::draw()
 	DrawString(Game::kScreenWidth - 250,20, "＜ B ＞で早押し！", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	DrawString(Game::kScreenWidth - 250, 0, "メニュー画面に戻るには＜ X ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	//明るさ変更
-	SetDrawBright(m_fadeIn, m_fadeIn, m_fadeIn);
+	SetDrawBright(static_cast<int>(m_fadeIn), static_cast<int>(m_fadeIn), static_cast<int>(m_fadeIn));
 
 	if (m_isWait)
 	{
@@ -141,7 +141,7 @@ void SceneMain::draw()
 
 	if (m_isFeint)
 	{
-		DrawCircle(Game::kScreenWidth / 2, Game::kScreenHeight / 2, m_sphereSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
+		DrawCircle(Game::kScreenWidth / 2, Game::kScreenHeight / 2, static_cast<int>(m_sphereSize), GetColor(kColorWhite, kColorWhite, kColorWhite), false);
 		DrawString(Game::kScreenWidth / 2 - 60, Game::kScreenHeight / 2, "今は！押すな！", GetColor(kColorWhite, kColorWhite, kColorWhite));
 		m_isWait = false;
 	}
@@ -152,7 +152,7 @@ void SceneMain::draw()
 	if (m_isMissText)
 	{
 		m_fadeOut--;
-		SetDrawBright(m_fadeOut, m_fadeOut, m_fadeOut);
+		SetDrawBright(static_cast<int>(m_fadeOut), static_cast<int>(m_fadeOut), static_cast<int>(m_fadeOut));
 		DrawString(300, 300, "焦るな！まだだ…", GetColor(kColorWhite, kColorWhite, kColorWhite));
 		SetDrawBright(kColorWhite, kColorWhite, kColorWhite);
 	}
@@ -160,7 +160,7 @@ void SceneMain::draw()
 	if (m_isPushScreen)
 	{
 		//円を表示
-		DrawCircle(Game::kScreenWidth / 2, Game::kScreenHeight / 2, m_sphereSize, GetColor(GetRand(255), GetRand(255), GetRand(255)), false);
+		DrawCircle(Game::kScreenWidth / 2, Game::kScreenHeight / 2, static_cast<int>(m_sphereSize), GetColor(GetRand(255), GetRand(255), GetRand(255)), false);
 		DrawString(Game::kScreenWidth / 2 - 40, Game::kScreenHeight / 2, "今だ押せ！", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	}
 }
