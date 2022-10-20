@@ -7,6 +7,7 @@ public:
 	SceneTitle()
 	{
 		m_isEnd = false;
+		m_hSceneGraphic = -1;
 	}
 	virtual ~SceneTitle() {}
 
@@ -21,4 +22,6 @@ public:
 private:
 
 	bool m_isEnd;
+
+	int m_hSceneGraphic;
 };

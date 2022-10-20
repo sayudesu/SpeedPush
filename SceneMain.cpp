@@ -30,6 +30,9 @@ void SceneMain::init()
 	m_isMissText = false;
 	m_isFeint = false;
 
+	m_hGraphic = -1;
+	m_hGraphic = LoadGraph("data/syuchuu.png");
+
 	m_fadeIn = 0.0f;	//色を変更
 	m_fadeOut = 0.0f;
 	m_justTime = 0.0f;	//乱数を代入
@@ -37,6 +40,7 @@ void SceneMain::init()
 	m_time = 0.0f;	//制限時間をカウント
 	m_feintTime = 0.0f; //フェイント時間をカウント
 	m_buttonClick = 0.0f;	//クリック回数をカウント
+
 }
 
 SceneBase* SceneMain::update()
@@ -120,19 +124,21 @@ SceneBase* SceneMain::update()
 
 void SceneMain::draw()
 {
+	DrawExtendGraph(0, 0, Game::kScreenWidth, Game::kScreenHeight, m_hGraphic, true);
+
 #if false
 	//乱数を表示
 	DrawFormatString(0, 200, GetColor(kColorWhite, kColorWhite, kColorWhite), "NowRand%d", m_justTime);
 #endif
 
 	//テキスト表示中
-	DrawString(0, 0, "＜ S p e e d P u s h ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	DrawString(0, 0, "＜ S p e e d P u s h ＞", GetColor(0, 0, kColorWhite));
 
-	DrawString(Game::kScreenWidth - 250,20, "＜ B ＞で早押し！", GetColor(kColorWhite, kColorWhite, kColorWhite));
-	DrawString(Game::kScreenWidth - 250, 0, "メニュー画面に戻るには＜ X ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	DrawString(Game::kScreenWidth - 250,20, "＜ B ＞で早押し！", GetColor(0, 0, kColorWhite));
+	DrawString(Game::kScreenWidth - 250, 0, "メニュー画面に戻るには＜ X ＞", GetColor(0,0, kColorWhite));
 	//明るさ変更
 	SetDrawBright(static_cast<int>(m_fadeIn), static_cast<int>(m_fadeIn), static_cast<int>(m_fadeIn));
-
+	
 	if (m_isWait)
 	{
 		//テキスト表示
@@ -161,6 +167,6 @@ void SceneMain::draw()
 	{
 		//円を表示
 		DrawCircle(Game::kScreenWidth / 2, Game::kScreenHeight / 2, static_cast<int>(m_sphereSize), GetColor(GetRand(255), GetRand(255), GetRand(255)), false);
-		DrawString(Game::kScreenWidth / 2 - 40, Game::kScreenHeight / 2, "今だ押せ！", GetColor(kColorWhite, kColorWhite, kColorWhite));
+		DrawString(Game::kScreenWidth / 2 - 40, Game::kScreenHeight / 2, "今だ押せ！", GetColor(kColorWhite, 0, 0));
 	}
 }

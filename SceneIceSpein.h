@@ -130,6 +130,8 @@ private:
 	Vec2 m_pos;
 	Vec2 m_vec;
 
+	Vec2 m_playerPos;
+
 	Vec2 m_enemyPos;
 	Vec2 m_enemyBirdPos;
 };

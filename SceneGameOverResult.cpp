@@ -10,15 +10,36 @@ namespace
 	constexpr int kTextSiseMin = 16;
 	//色指定
 	constexpr int kColorWhite = 255;
+
+	constexpr int kGraphicSize = 300;
 }
 
 void SceneGameOverResult::init()
 {
 	m_isEnd = false;
+	m_isGraphicNum = false;
+
+	m_hOverGraphic = -1;
+	m_hOverGraphicNext = -1;
+
+	m_hOverGraphic = LoadGraph("data/text_gameover1.png");
+	m_hOverGraphicNext = LoadGraph("data/text_gameover2.png");
+
+	m_randomScene = GetRand(1);
 }
 
 SceneBase* SceneGameOverResult::update()
 {
+	//どのゲームオーバー画面にするかランダムで決める。
+	if (m_randomScene == 0)
+	{
+		m_isGraphicNum = false;
+	}
+	else
+	{
+		m_isGraphicNum = true;
+	}
+
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
 	if (padState & PAD_INPUT_3)
@@ -31,11 +52,15 @@ SceneBase* SceneGameOverResult::update()
 
 void SceneGameOverResult::draw()
 {
-	DrawString(0, 0, "ゲームオーバーリザルト画面切り替え", GetColor(kColorWhite, kColorWhite, kColorWhite));
-	SetFontSize(kTextSise);
-	DrawString(Game::kScreenWidth / 2 - 200, Game::kScreenHeight / 2 - 40, "G a m e O v e r", GetColor(kColorWhite, kColorWhite, kColorWhite));
-	SetFontSize(kTextSiseMin);
+	if (m_isGraphicNum)
+	{
+		DrawExtendGraph(kGraphicSize, kGraphicSize, Game::kScreenWidth - kGraphicSize, Game::kScreenHeight - kGraphicSize, m_hOverGraphic, true);
+	}
+	else
+	{
+		DrawExtendGraph(kGraphicSize, kGraphicSize, Game::kScreenWidth - kGraphicSize, Game::kScreenHeight - kGraphicSize, m_hOverGraphicNext, true);
+	}
 
-	DrawString(Game::kScreenWidth / 2 - 80, Game::kScreenHeight - 100, "押すことに失敗した", GetColor(kColorWhite, kColorWhite, kColorWhite));
+	SetFontSize(kTextSiseMin);
 	DrawString(Game::kScreenWidth / 2 - 80, Game::kScreenHeight - 80, "メニューに戻る場合は< X >", GetColor(kColorWhite, kColorWhite, kColorWhite));
 }

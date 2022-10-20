@@ -41,6 +41,6 @@ void SceneRuleTable::draw()
 	DrawString(0, 0, "ゲームルール説明", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	DrawString(Game::kScreenWidth / 2 + kLetterLineB, Game::kScreenHeight / 2 - 80, "＜ I c e S p e i n ＞", GetColor(255, 255, 255));
 	DrawString(Game::kScreenWidth / 2 + kLetterLineB, Game::kScreenHeight / 2 - 50, "IceSpeinは画面の青い円(氷)から出ないで制限時間内を耐えるとクリア", GetColor(255, 255, 255));
-	DrawString(Game::kScreenWidth / 2 + kLetterLineB, Game::kScreenHeight / 2 - 30, "アザラシ飛んでくるのでそれに食べられるとゲームオーバー", GetColor(255, 255, 255));
+	DrawString(Game::kScreenWidth / 2 + kLetterLineB, Game::kScreenHeight / 2 - 30, "敵（アザラシと鳥）が飛んでくるのでそれに食べられるとゲームオーバー", GetColor(255, 255, 255));
 	//DrawString(Game::kScreenWidth / 2 - kLetterLineB, Game::kScreenHeight / 2 - 10, "", GetColor(255, 255, 255));
 }

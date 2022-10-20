@@ -15,6 +15,8 @@ public:
 		m_isKeyPush    = false;
 		m_isMissText   = false;
 
+		m_hGraphic = -1;
+
 		m_fadeIn      = 0.0f;
 		m_fadeOut     = 0.0f;
 		m_justTime    = 0.0f;
@@ -46,6 +48,8 @@ private:
 	bool m_isKeyPush;
 
 	bool m_isMissText;
+
+	int m_hGraphic;
 
 	float m_fadeIn;
 

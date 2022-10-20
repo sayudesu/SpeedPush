@@ -8,6 +8,10 @@ public:
 	SceneGameOverResult()
 	{
 		m_isEnd = false;
+		m_isGraphicNum = false;
+		m_hOverGraphic = -1;
+		m_hOverGraphicNext = -1;
+		m_randomScene = 0;
 	}
 	virtual ~SceneGameOverResult() {}
 
@@ -22,4 +26,12 @@ public:
 private:
 
 	bool m_isEnd;
+
+	bool m_isGraphicNum;
+
+	int m_hOverGraphic;
+
+	int m_hOverGraphicNext;
+
+	int m_randomScene;
 };

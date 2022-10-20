@@ -63,7 +63,7 @@ void SceneIceSpein::init()
 	m_hEnemyGraphic     = LoadGraph("data/azarasi.png");
 	m_hMapGraphic       = LoadGraph("data/umi.jpg");
 	m_hEnemyBirdGraphic = LoadGraph("data/kkamome.png");
-	/*
+
 	m_count = 0;
 	m_EnemyMoveCount = 0;
 
@@ -98,8 +98,8 @@ void SceneIceSpein::init()
 	m_PositionSide = 0;
 	m_PositionUpSide = 0;
 
-	m_pos.x = static_cast<float>(Game::kScreenWidth) / 2.0f;
-	m_pos.y = static_cast<float>(Game::kScreenHeight) / 2.0f;
+	m_pos.x = static_cast<float>(Game::kScreenWidth) / 2;
+	m_pos.y = static_cast<float>(Game::kScreenHeight) / 2;
 
 	m_vec.x = 0.0f;
 	m_vec.y = 0.0f;
@@ -115,7 +115,10 @@ void SceneIceSpein::init()
 
 	m_enemyBirdPos.x = 0.0f;
 	m_enemyBirdPos.y = 0.0f;
-	*/
+
+	m_playerPos.x = 40.0f;
+	m_playerPos.y = 40.0f;
+
 }
 
 SceneBase* SceneIceSpein::update()
@@ -158,32 +161,39 @@ SceneBase* SceneIceSpein::update()
 		}
 	}
 	m_pos += m_vec;
+	
+	m_playerPos.x += m_pos.x;
+	m_playerPos.y += m_pos.y;
 
 	//プレイヤーの位置を取得
 	m_PlayerSizeX = m_pos.x;
 	m_PlayerSizeY = m_pos.y;
-
+	
 	//敵を表示
 	ScreenEnemy();
 	//画面外に出ると画像を消す
 	ScreenOut();
 
 	//勝敗判定
+	
 	if (m_SphereSizeUp == kSphereSizeMax)//Win
 	{
 		return(new SceneGameClearResult);
 	}
 	if (!CheckHit())					//Lose
 	{
-		return(new SceneGameOverResult);
+		return(new SceneGameClearResult);
+		//return(new SceneGameOverResult);
 	}
 	if (!CheckHitEnemy())				//Lose
 	{
-		return(new SceneGameOverResult);
+		return(new SceneGameClearResult);
+		//return(new SceneGameOverResult);
 	}
 	if (!CheckHitEnemyBird())
 	{
-		return(new SceneGameOverResult);//Loss
+		return(new SceneGameClearResult);
+		//return(new SceneGameOverResult);//Loss
 	}
 
 	//メニューに戻るボタン
@@ -208,16 +218,16 @@ void SceneIceSpein::draw()
 	DrawCircle(Game::kScreenWidth / 2, Game::kScreenHeight / 2, static_cast<int>(m_SphereSizeUp), GetColor(GetRand(kColorWhite), GetRand(kColorWhite), GetRand(kColorWhite)), false);
 
 	//プレイヤーを表示&円
-	DrawGraph(static_cast<int>(m_PlayerSizeX), static_cast<int>(m_PlayerSizeY), m_hPlayerGraphic, true);
-#if true //////////////////////////////////////////修正ポイント//////////////////////////////////
-	DrawCircle(static_cast<int>(m_PlayerSizeX) , static_cast<int>(m_PlayerSizeY), static_cast<int>(kPlayerSize), GetColor(kColorWhite, kColorWhite, kColorWhite), false);
+	DrawGraph(static_cast<int>(m_pos.x), static_cast<int>(m_pos.y), m_hPlayerGraphic, true);
+#if false
+	DrawCircle(static_cast<int>(m_pos.x + 40) , static_cast<int>(m_pos.y + 40), static_cast<int>(kPlayerSize), GetColor(kColorWhite, kColorWhite, kColorWhite), false);
 #endif
 	//敵を表示
 	if (m_isDelete)
 	{
 		DrawRotaGraph(static_cast<int>(m_enemyPos.x), static_cast<int>(m_enemyPos.y), 1.0f, 0.0f, m_hEnemyGraphic, true, false);
 #if false
-		DawCircle(m_enemyPos.x, m_enemyPos.y, kPlayerSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
+		DrawCircle(m_enemyPos.x, m_enemyPos.y, kPlayerSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
 #endif
 	}
 	if (m_isBirdDelete)
@@ -290,8 +300,8 @@ void SceneIceSpein::ScreenOut()
 bool SceneIceSpein::CheckHit()
 {
 	//当たり判定
-	m_GetHitX = m_PlayerSizeX - m_SphereSizeX;
-	m_GetHitY = m_PlayerSizeY - m_SphereSizeY;
+	m_GetHitX = m_pos.x + 40.0f - m_SphereSizeX;
+	m_GetHitY = m_pos.y + 40.0f - m_SphereSizeY;
 	m_GetHit   = m_GetHitX * m_GetHitX + m_GetHitY * m_GetHitY;
 
 	m_CenterSize = kPlayerSize + kSphereSize;
@@ -307,8 +317,8 @@ bool SceneIceSpein::CheckHit()
 bool SceneIceSpein::CheckHitEnemy()
 {
 	//当たり判定
-	m_GetEnemyHitX =  m_enemyPos.x - m_PlayerSizeX;
-	m_GetEnemyHitY =  m_enemyPos.y - m_PlayerSizeY;
+	m_GetEnemyHitX = m_enemyPos.x - m_PlayerSizeX;
+	m_GetEnemyHitY = m_enemyPos.y - m_PlayerSizeY;
 	m_GetEnemyHit = m_GetEnemyHitX * m_GetEnemyHitX + m_GetEnemyHitY * m_GetEnemyHitY;
 
 	m_CenterEnemySize = kPlayerSize + kPlayerSize;

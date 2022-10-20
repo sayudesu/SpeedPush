@@ -14,6 +14,10 @@ namespace
 void SceneTitle::init()
 {
 	m_isEnd = false;
+
+	m_hSceneGraphic = -1;
+
+	m_hSceneGraphic = LoadGraph("data/MainScene.jpg");
 }
 
 SceneBase* SceneTitle::update()
@@ -36,18 +40,18 @@ SceneBase* SceneTitle::update()
 	}
 
 	return this;
-
 }
 
 void SceneTitle::draw()
 {
+	//タイトル画面用の背景画像
+	DrawExtendGraph(0, 0,Game::kScreenWidth,Game::kScreenHeight, m_hSceneGraphic , true);
+	DrawGraph(0, 0, m_hSceneGraphic, TRUE);
+	
 	//フォント変更
 	ChangeFont("MS UI Gothic");
-
-	DrawString(0, 0, "タイトル画面", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	DrawString(Game::kScreenWidth / 2 - 170, Game::kScreenHeight / 2 - 50,"SpeedPushをプレイは ＜ A ＞　", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	DrawString(Game::kScreenWidth / 2 - 170, Game::kScreenHeight / 2 - 30,"IceSpin  をプレイは ＜ B ＞  ", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	DrawString(Game::kScreenWidth / 2 - 170, Game::kScreenHeight / 2 + 40,"これらのゲームルールを確認するには　＜ ↑ ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
-	//PCの場合
-	//DrawString(Game::kScreenWidth / 2 - 80, Game::kScreenHeight - 100, "< s　p　a　c　e >", GetColor(255, 255, 255));
+	
 }
