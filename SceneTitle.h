@@ -9,7 +9,7 @@ public:
 		m_isEnd = false;
 		m_hSceneGraphic = -1;
 	}
-	virtual ~SceneTitle();
+	virtual ~SceneTitle(){}
 
 	virtual void init();
 	virtual void end();

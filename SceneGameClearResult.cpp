@@ -14,17 +14,6 @@ namespace
 	constexpr int kGraphicSize = 300;
 }
 
-SceneGameClearResult::~SceneGameClearResult()
-{
-	m_isEnd = false;
-	m_isGraphicNum = false;
-
-	m_hClearGraphic = -1;
-	m_hClearGraphicNext = -1;
-
-	m_randomScene = GetRand(1);
-}
-
 void SceneGameClearResult::init()
 {
 	m_hClearGraphic = LoadGraph("data/text_gameclear1.png");

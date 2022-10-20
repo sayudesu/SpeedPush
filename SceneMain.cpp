@@ -20,25 +20,7 @@ namespace
 	//色指定
 	constexpr int kColorWhite = 255;
 }
-SceneMain::~SceneMain()
-{
-	m_isEnd = false;
-	m_isWait = true;
-	m_isPushScreen = false;
-	m_isKeyPush = false;
-	m_isMissText = false;
-	m_isFeint = false;
 
-	m_hGraphic = -1;
-
-	m_fadeIn = 0.0f;	  //色を変更
-	m_fadeOut = 0.0f;
-	m_justTime = 0.0f;	  //乱数を代入
-	m_sphereSize = 100.0f;//球体のサイズを変更
-	m_time = 0.0f;	      //制限時間をカウント
-	m_feintTime = 0.0f;   //フェイント時間をカウント
-	m_buttonClick = 0.0f; //クリック回数をカウント
-}
 void SceneMain::init()
 {
 	m_hGraphic = LoadGraph("data/syuchuu.png");

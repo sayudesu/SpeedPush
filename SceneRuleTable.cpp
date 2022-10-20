@@ -11,11 +11,7 @@ namespace
 	constexpr int kLetterLine  = 500;
 	constexpr int kLetterLineB = 60;
 }
-SceneRuleTable::~SceneRuleTable()
-{
-	m_isEnd = false;
-	m_hGraphic = -1;
-}
+
 void SceneRuleTable::init()
 {
 	m_hGraphic = LoadGraph("data/white.jpg");

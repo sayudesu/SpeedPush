@@ -13,7 +13,7 @@ public:
 		m_hOverGraphicNext = -1;
 		m_randomScene = 0;
 	}
-	virtual ~SceneGameOverResult();
+	virtual ~SceneGameOverResult(){}
 
 	virtual void init();
 	virtual void end();

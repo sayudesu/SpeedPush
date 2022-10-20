@@ -13,16 +13,6 @@ namespace
 
 	constexpr int kGraphicSize = 300;
 }
-SceneGameOverResult::~SceneGameOverResult()
-{
-	m_isEnd = false;
-	m_isGraphicNum = false;
-
-	m_hOverGraphic = -1;
-	m_hOverGraphicNext = -1;
-
-	m_randomScene = GetRand(1);
-}
 
 void SceneGameOverResult::init()
 {

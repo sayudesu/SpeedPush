@@ -12,7 +12,7 @@ public:
 		m_hClearGraphicNext = -1;
 		m_randomScene = 0;
 	}
-	virtual ~SceneGameClearResult();
+	virtual ~SceneGameClearResult(){}
 
 	virtual void init();
 	virtual void end();

@@ -11,12 +11,6 @@ namespace
 	constexpr int kColorWhite = 255;
 }
 
-SceneTitle::~SceneTitle()
-{
-	m_isEnd = false;
-	m_hSceneGraphic = -1;
-}
-
 void SceneTitle::init()
 {
 	m_hSceneGraphic = LoadGraph("data/MainScene.jpg");

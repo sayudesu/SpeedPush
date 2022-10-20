@@ -22,11 +22,12 @@ public:
 		m_hEnemyBirdGraphic = -1;
 		m_hMapGraphic       = -1;
 			;
-		m_count          = 0;
+		m_count          = 9;
 		m_EnemyMoveCount = 0;
 		m_SphereSizeX    = Game::kScreenWidth / 2;
 		m_SphereSizeY    = Game::kScreenHeight / 2;
 		m_SphereSizeUp = 100.0f;
+		m_SphereSizeUpTime = 0;
 		m_PlayerSizeX  = 0.0f;
 		m_PlayerSizeY  = 0.0f;
 
@@ -51,10 +52,10 @@ public:
 		m_PositionSide   = 0;
 	    m_PositionUpSide = 0;
 
-		m_pos.x = static_cast<float>(Game::kScreenWidth) / 2 - 40;
-		m_pos.y = static_cast<float>(Game::kScreenHeight) / 2 - 40;
+		m_pos.x = static_cast<float>(Game::kScreenWidth) / 2;
+		m_pos.y = static_cast<float>(Game::kScreenHeight) / 2;
 	}
-	virtual ~SceneIceSpein();
+	virtual ~SceneIceSpein(){};
 
 	virtual void init();
 	virtual void end();
@@ -104,6 +105,7 @@ private:
 	int m_SphereSizeY;
 	//円のサイズを大きくする
 	float m_SphereSizeUp;
+	int m_SphereSizeUpTime;
 	//プレイヤー当たり判定サイズ
 	float m_PlayerSizeX;
 	float m_PlayerSizeY;

@@ -24,7 +24,7 @@ public:
 		m_feintTime   = 0.0f;
 		m_buttonClick = 0.0f;
 	}
-	virtual ~SceneMain();
+	virtual ~SceneMain(){}
 
 
 	virtual void init();
@@ -50,17 +50,17 @@ private:
 
 	int m_hGraphic;
 
-	float m_fadeIn;
+	float m_fadeIn;    //色を変更
 
 	float m_fadeOut;
 
-	float m_justTime;
+	float m_justTime;  //乱数を代入
 
-	float m_sphereSize;
+	float m_sphereSize;//球体のサイズを変更
 
-	float m_time;
+	float m_time;      //制限時間をカウント
 
-	float m_feintTime;
+	float m_feintTime; //フェイント時間をカウント
 
-	float m_buttonClick;
+	float m_buttonClick;//クリック回数をカウント
 };

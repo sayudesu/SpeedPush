@@ -15,7 +15,7 @@ namespace
 
 	// X方向、Y方向の最大速度
 	constexpr float kSpeedMax = 8.0f;
-	constexpr float kAcc = 0.4f;
+	constexpr float kAcc = 1.0f;
 
 	//プレイヤーの当たり判定
 	constexpr float kPlayerSize = 35.0f;
@@ -30,89 +30,14 @@ namespace
 	constexpr float kSphereSizeMax = 650.0f;
 
 	//敵のスピード
-	constexpr float kEnemySpeed = 8.0f;
-	constexpr float kEnemyBirdSpeed = 12.0f;
+	constexpr float kEnemySpeed = 15.0f;
+	constexpr float kEnemyBirdSpeed = 22.0f;
 
 	//敵の位置変更
 	constexpr float kEnemyPosition = 70;
 
 }
-SceneIceSpein::~SceneIceSpein()
-{
-	m_isDelete = false;
 
-	m_isBirdDelete = false;
-
-	m_isUpSide = false;
-
-	m_isDownSide = false;
-
-	m_isRightSide = false;
-
-	m_isLeftSide = false;
-
-	m_isTracking = false;
-
-	m_hPlayerGraphic = -1;
-	m_hEnemyGraphic = -1;
-	m_hEnemyBirdGraphic = -1;
-	m_hMapGraphic = -1;
-
-	m_count = 0;
-	m_EnemyMoveCount = 0;
-
-	m_SphereSizeX = Game::kScreenWidth / 2;
-	m_SphereSizeY = Game::kScreenHeight / 2;
-
-	m_SphereSizeUp = 100.0f;
-
-
-	m_GetHitX = 0.0f;
-	m_GetHitY = 0.0f;
-	m_GetHit = 0.0f;
-
-	m_CenterSize = 0.0f;
-	m_CenterMatch = 0.0f;
-
-	m_GetEnemyHitX = 0.0f;
-	m_GetEnemyHitY = 0.0f;
-	m_GetEnemyHit = 0.0f;
-
-	m_CenterEnemySize = 0.0f;
-	m_CenterEnemyMatch = 0.0f;
-
-	m_GetEnemyBirdHitX = 0.0f;
-	m_GetEnemyBirdHitY = 0.0f;
-	m_GetEnemyBirdHit = 0.0f;
-
-	m_CenterEnemyBirdSize = 0.0f;
-	m_CenterEnemyBirdMatch = 0.0f;
-
-
-	m_PositionSide = 0;
-	m_PositionUpSide = 0;
-
-	m_pos.x = static_cast<float>(Game::kScreenWidth) / 2;
-	m_pos.y = static_cast<float>(Game::kScreenHeight) / 2;
-
-	m_vec.x = 0.0f;
-	m_vec.y = 0.0f;
-
-	m_enemyPos.x = 0.0f;
-	m_enemyPos.y = 0.0f;
-
-	m_PlayerSizeX = m_pos.x;
-	m_PlayerSizeY = m_pos.y;
-
-	m_enemyPos.y = 0.0f;
-	m_enemyPos.x = 0.0f;
-
-	m_enemyBirdPos.x = 0.0f;
-	m_enemyBirdPos.y = 0.0f;
-
-	m_playerPos.x = 40.0f;
-	m_playerPos.y = 40.0f;
-}
 void SceneIceSpein::init()
 {
 	//グラフィックのロード
@@ -133,7 +58,14 @@ SceneBase* SceneIceSpein::update()
 {
 	//円の広がるスピード
 	m_SphereSizeUp += kSphereSpeed;
-	
+	m_SphereSizeUpTime++;
+
+	if (m_SphereSizeUpTime == 60)
+	{
+		m_count--;
+		m_SphereSizeUpTime = 0;
+	}
+
 	//移動キー
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 	if (padState & PAD_INPUT_UP)
@@ -181,29 +113,26 @@ SceneBase* SceneIceSpein::update()
 	ScreenEnemy();
 	//画面外に出ると画像を消す
 	ScreenOut();
-
-	//勝敗判定
 	
+	//勝敗判定
 	if (m_SphereSizeUp == kSphereSizeMax)//Win
 	{
 		return(new SceneGameClearResult);
 	}
+#if false
 	if (!CheckHit())					//Lose
 	{
-		return(new SceneGameClearResult);
-		//return(new SceneGameOverResult);
+		return(new SceneGameOverResult);
 	}
 	if (!CheckHitEnemy())				//Lose
 	{
-		return(new SceneGameClearResult);
-		//return(new SceneGameOverResult);
+		return(new SceneGameOverResult);
 	}
 	if (!CheckHitEnemyBird())
 	{
-		return(new SceneGameClearResult);
-		//return(new SceneGameOverResult);//Loss
+		return(new SceneGameOverResult);//Loss
 	}
-
+#endif
 	//メニューに戻るボタン
 	if (padState & PAD_INPUT_3)
 	{
@@ -245,6 +174,9 @@ void SceneIceSpein::draw()
 		DrawCircle(m_enemyBirdPos.x, m_enemyBirdPos.y, kPlayerSize, GetColor(kColorWhite, kColorWhite, kColorWhite), false);
 #endif
 	}
+	SetFontSize(64);
+	DrawFormatString(0,30, GetColor(kColorWhite, kColorWhite, 0), "残り時間 %d ",m_count);
+	SetFontSize(16);
 }
 
 void SceneIceSpein::ScreenEnemy()
