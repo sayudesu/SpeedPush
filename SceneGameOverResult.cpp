@@ -13,8 +13,7 @@ namespace
 
 	constexpr int kGraphicSize = 300;
 }
-
-void SceneGameOverResult::init()
+SceneGameOverResult::~SceneGameOverResult()
 {
 	m_isEnd = false;
 	m_isGraphicNum = false;
@@ -22,10 +21,19 @@ void SceneGameOverResult::init()
 	m_hOverGraphic = -1;
 	m_hOverGraphicNext = -1;
 
+	m_randomScene = GetRand(1);
+}
+
+void SceneGameOverResult::init()
+{
 	m_hOverGraphic = LoadGraph("data/text_gameover1.png");
 	m_hOverGraphicNext = LoadGraph("data/text_gameover2.png");
+}
 
-	m_randomScene = GetRand(1);
+void SceneGameOverResult::end()
+{
+	DeleteGraph(m_hOverGraphic);
+	DeleteGraph(m_hOverGraphicNext);
 }
 
 SceneBase* SceneGameOverResult::update()

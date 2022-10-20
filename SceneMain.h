@@ -25,11 +25,11 @@ public:
 		m_feintTime   = 0.0f;
 		m_buttonClick = 0.0f;
 	}
-	virtual ~SceneMain() {}
+	virtual ~SceneMain();
 
 
 	virtual void init();
-	virtual void end() {}
+	virtual void end();
 
 	virtual SceneBase* update() override;
 	virtual void draw();

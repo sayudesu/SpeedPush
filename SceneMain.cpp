@@ -20,8 +20,7 @@ namespace
 	//色指定
 	constexpr int kColorWhite = 255;
 }
-
-void SceneMain::init()
+SceneMain::~SceneMain()
 {
 	m_isEnd = false;
 	m_isWait = true;
@@ -31,7 +30,6 @@ void SceneMain::init()
 	m_isFeint = false;
 
 	m_hGraphic = -1;
-	m_hGraphic = LoadGraph("data/syuchuu.png");
 
 	m_fadeIn = 0.0f;	//色を変更
 	m_fadeOut = 0.0f;
@@ -40,7 +38,14 @@ void SceneMain::init()
 	m_time = 0.0f;	//制限時間をカウント
 	m_feintTime = 0.0f; //フェイント時間をカウント
 	m_buttonClick = 0.0f;	//クリック回数をカウント
-
+}
+void SceneMain::init()
+{
+	m_hGraphic = LoadGraph("data/syuchuu.png");
+}
+void SceneMain::end()
+{
+	DeleteGraph(m_hGraphic);
 }
 
 SceneBase* SceneMain::update()

@@ -51,11 +51,10 @@ public:
 	    m_PositionUpSide = 0;
 
 	}
-	virtual ~SceneIceSpein(){}
-
+	virtual ~SceneIceSpein();
 
 	virtual void init();
-	virtual void end() {}
+	virtual void end();
 
 	virtual SceneBase* update() override;
 	virtual void draw();

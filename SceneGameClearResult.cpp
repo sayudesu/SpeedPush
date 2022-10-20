@@ -14,7 +14,7 @@ namespace
 	constexpr int kGraphicSize = 300;
 }
 
-void SceneGameClearResult::init()
+SceneGameClearResult::~SceneGameClearResult()
 {
 	m_isEnd = false;
 	m_isGraphicNum = false;
@@ -22,10 +22,20 @@ void SceneGameClearResult::init()
 	m_hClearGraphic = -1;
 	m_hClearGraphicNext = -1;
 
+	m_randomScene = GetRand(1);
+}
+
+void SceneGameClearResult::init()
+{
 	m_hClearGraphic = LoadGraph("data/text_gameclear1.png");
 	m_hClearGraphicNext = LoadGraph("data/text_gameclear2.png");
+}
 
-	m_randomScene = GetRand(1);
+void SceneGameClearResult::end()
+{
+	DeleteGraph(m_hClearGraphic);
+	DeleteGraph(m_hClearGraphicNext);
+
 }
 
 SceneBase* SceneGameClearResult::update()

@@ -11,13 +11,19 @@ namespace
 	constexpr int kColorWhite = 255;
 }
 
-void SceneTitle::init()
+SceneTitle::~SceneTitle()
 {
 	m_isEnd = false;
-
 	m_hSceneGraphic = -1;
+}
 
+void SceneTitle::init()
+{
 	m_hSceneGraphic = LoadGraph("data/MainScene.jpg");
+}
+void SceneTitle::end()
+{
+	DeleteGraph(m_hSceneGraphic);
 }
 
 SceneBase* SceneTitle::update()
@@ -46,7 +52,7 @@ void SceneTitle::draw()
 {
 	//タイトル画面用の背景画像
 	DrawExtendGraph(0, 0,Game::kScreenWidth,Game::kScreenHeight, m_hSceneGraphic , true);
-	DrawGraph(0, 0, m_hSceneGraphic, TRUE);
+	//DrawGraph(0, 0, m_hSceneGraphic, TRUE);
 	
 	//フォント変更
 	ChangeFont("MS UI Gothic");

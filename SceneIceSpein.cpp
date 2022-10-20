@@ -37,8 +37,7 @@ namespace
 	constexpr float kEnemyPosition = 70;
 
 }
-
-void SceneIceSpein::init()
+SceneIceSpein::~SceneIceSpein()
 {
 	m_isDelete = false;
 
@@ -58,11 +57,6 @@ void SceneIceSpein::init()
 	m_hEnemyGraphic = -1;
 	m_hEnemyBirdGraphic = -1;
 	m_hMapGraphic = -1;
-	//グラフィックのロード
-	m_hPlayerGraphic    = LoadGraph("data/pengin.png");
-	m_hEnemyGraphic     = LoadGraph("data/azarasi.png");
-	m_hMapGraphic       = LoadGraph("data/umi.jpg");
-	m_hEnemyBirdGraphic = LoadGraph("data/kkamome.png");
 
 	m_count = 0;
 	m_EnemyMoveCount = 0;
@@ -87,7 +81,7 @@ void SceneIceSpein::init()
 	m_CenterEnemySize = 0.0f;
 	m_CenterEnemyMatch = 0.0f;
 
-    m_GetEnemyBirdHitX = 0.0f;
+	m_GetEnemyBirdHitX = 0.0f;
 	m_GetEnemyBirdHitY = 0.0f;
 	m_GetEnemyBirdHit = 0.0f;
 
@@ -109,7 +103,7 @@ void SceneIceSpein::init()
 
 	m_PlayerSizeX = m_pos.x;
 	m_PlayerSizeY = m_pos.y;
-	
+
 	m_enemyPos.y = 0.0f;
 	m_enemyPos.x = 0.0f;
 
@@ -118,7 +112,21 @@ void SceneIceSpein::init()
 
 	m_playerPos.x = 40.0f;
 	m_playerPos.y = 40.0f;
-
+}
+void SceneIceSpein::init()
+{
+	//グラフィックのロード
+	m_hPlayerGraphic    = LoadGraph("data/pengin.png");
+	m_hEnemyGraphic     = LoadGraph("data/azarasi.png");
+	m_hMapGraphic       = LoadGraph("data/umi.jpg");
+	m_hEnemyBirdGraphic = LoadGraph("data/kkamome.png");
+}
+void SceneIceSpein::end()
+{
+	DeleteGraph(m_hPlayerGraphic);
+	DeleteGraph(m_hEnemyGraphic);
+	DeleteGraph(m_hMapGraphic);
+	DeleteGraph(m_hEnemyBirdGraphic);
 }
 
 SceneBase* SceneIceSpein::update()
@@ -214,7 +222,7 @@ void SceneIceSpein::draw()
 	DrawString(Game::kScreenWidth - 250, 0, "メニュー画面に戻るには＜ X ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
 
 	//円を表示
-	DrawCircle(m_SphereSizeX, m_SphereSizeY, static_cast<int>(kSphereSize), GetColor(100,255,255), true);
+	DrawCircle(m_SphereSizeX, m_SphereSizeY, static_cast<int>(kSphereSize), GetColor(100, kColorWhite, kColorWhite), true);
 	DrawCircle(Game::kScreenWidth / 2, Game::kScreenHeight / 2, static_cast<int>(m_SphereSizeUp), GetColor(GetRand(kColorWhite), GetRand(kColorWhite), GetRand(kColorWhite)), false);
 
 	//プレイヤーを表示&円
