@@ -24,7 +24,7 @@ void SceneRuleTable::end()
 SceneBase* SceneRuleTable::update()
 {
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-
+	//タイトルに移動
 	if (padState & PAD_INPUT_DOWN)
 	{
 		return(new SceneTitle);
@@ -49,5 +49,4 @@ void SceneRuleTable::draw()
 	DrawString(Game::kScreenWidth / 2 + kLetterLineB, Game::kScreenHeight / 2 - 80, "＜ I c e S p e i n ＞", GetColor(0, 255, 255));
 	DrawString(Game::kScreenWidth / 2 + kLetterLineB, Game::kScreenHeight / 2 - 50, "IceSpeinは画面の青い円(氷)から出ないで制限時間内を耐えるとクリア", GetColor(0, 255, 255));
 	DrawString(Game::kScreenWidth / 2 + kLetterLineB, Game::kScreenHeight / 2 - 30, "敵（アザラシと鳥）が飛んでくるのでそれに食べられるとゲームオーバー", GetColor(0, 255, 255));
-	//DrawString(Game::kScreenWidth / 2 - kLetterLineB, Game::kScreenHeight / 2 - 10, "", GetColor(255, 255, 255));
 }

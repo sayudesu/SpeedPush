@@ -119,7 +119,7 @@ SceneBase* SceneIceSpein::update()
 	{
 		return(new SceneGameClearResult);
 	}
-#if false
+#if true
 	if (!CheckHit())					//Lose
 	{
 		return(new SceneGameOverResult);
@@ -146,6 +146,9 @@ void SceneIceSpein::draw()
 {
 	//仮の画像を表示
 	DrawGraph(0, 0, m_hMapGraphic, true);
+	//文字の背景（黒べた塗）
+	DrawBox(0, 0, 300,100, GetColor(1, 1, 1), true);
+	DrawBox(Game::kScreenWidth - 250, 0, Game::kScreenWidth - 40, 20, GetColor(1, 1, 1), true);
 	//テキスト表示中
 	DrawString(0 , 0, "＜ S c e n e I c e S p e i n ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));
 	DrawString(Game::kScreenWidth - 250, 0, "メニュー画面に戻るには＜ X ＞", GetColor(kColorWhite, kColorWhite, kColorWhite));

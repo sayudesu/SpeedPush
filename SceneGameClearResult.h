@@ -10,6 +10,7 @@ public:
 		m_isGraphicNum = false;
 		m_hClearGraphic = -1;
 		m_hClearGraphicNext = -1;
+		m_isTimeNum = 0;
 		m_randomScene = 0;
 	}
 	virtual ~SceneGameClearResult(){}
@@ -32,5 +33,6 @@ private:
 
 	int m_hClearGraphicNext;
 
+	int m_isTimeNum;
 	int m_randomScene;
 };

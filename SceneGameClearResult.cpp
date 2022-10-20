@@ -29,6 +29,12 @@ void SceneGameClearResult::end()
 
 SceneBase* SceneGameClearResult::update()
 {
+	m_isTimeNum++;
+	//一度だけランダムな数字を代入
+	if (m_isTimeNum == 1)
+	{
+		m_randomScene = GetRand(1);
+	}
 	//どのゲームオーバー画面にするかランダムで決める。
 	if (m_randomScene == 0)
 	{
@@ -40,7 +46,7 @@ SceneBase* SceneGameClearResult::update()
 	}
 
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-
+	//メニュー画面に移動
 	if (padState & PAD_INPUT_3)
 	{
 		return(new SceneTitle);
@@ -51,6 +57,7 @@ SceneBase* SceneGameClearResult::update()
 
 void SceneGameClearResult::draw()
 {
+	//ランダムで画像を変更
 	if (m_isGraphicNum)
 	{
 		DrawExtendGraph(kGraphicSize, kGraphicSize, Game::kScreenWidth - kGraphicSize, Game::kScreenHeight - kGraphicSize, m_hClearGraphic, true);

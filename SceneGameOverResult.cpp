@@ -28,6 +28,12 @@ void SceneGameOverResult::end()
 
 SceneBase* SceneGameOverResult::update()
 {
+	m_isTimeNum++;
+	//一度だけランダムな数字を代入
+	if (m_isTimeNum == 1)
+	{
+		m_randomScene = GetRand(1);
+	}
 	//どのゲームオーバー画面にするかランダムで決める。
 	if (m_randomScene == 0)
 	{
@@ -39,7 +45,7 @@ SceneBase* SceneGameOverResult::update()
 	}
 
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-
+	//メニュー画面に移動
 	if (padState & PAD_INPUT_3)
 	{
 		return(new SceneTitle);
@@ -50,6 +56,7 @@ SceneBase* SceneGameOverResult::update()
 
 void SceneGameOverResult::draw()
 {
+	//ランダムで画像を変更
 	if (m_isGraphicNum)
 	{
 		DrawExtendGraph(kGraphicSize, kGraphicSize, Game::kScreenWidth - kGraphicSize, Game::kScreenHeight - kGraphicSize, m_hOverGraphic, true);

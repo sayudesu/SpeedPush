@@ -11,6 +11,7 @@ public:
 		m_isGraphicNum = false;
 		m_hOverGraphic = -1;
 		m_hOverGraphicNext = -1;
+		m_isTimeNum = 0;
 		m_randomScene = 0;
 	}
 	virtual ~SceneGameOverResult(){}
@@ -28,9 +29,11 @@ private:
 
 	bool m_isGraphicNum;
 
+
 	int m_hOverGraphic;
 
 	int m_hOverGraphicNext;
 
+	int m_isTimeNum;
 	int m_randomScene;
 };

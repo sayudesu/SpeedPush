@@ -23,12 +23,12 @@ void SceneTitle::end()
 SceneBase* SceneTitle::update()
 {
 	int padState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-	//SpeedPush
+	//SpeedPush‚ÉˆÚ“®
 	if (padState & PAD_INPUT_1)
 	{
 		return(new SceneMain);
 	}
-	//IceSpin
+	//IceSpin‚ÉˆÚ“®
 	if (padState & PAD_INPUT_2)
 	{
 		return (new SceneIceSpein);
