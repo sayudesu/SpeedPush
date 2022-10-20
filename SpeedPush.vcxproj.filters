@@ -33,16 +33,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>ソース ファイル\Scenes\SpeedPush</Filter>
     </ClCompile>
-    <ClCompile Include="Vec2.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="SceneIceSpin.cpp">
+      <Filter>ソース ファイル\Scenes\IceSpin</Filter>
     </ClCompile>
-    <ClCompile Include="SelectMenu.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="SceneGameClearResult.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="SceneBase.cpp">
+    <ClCompile Include="SceneGameOverResult.cpp">
       <Filter>ソース ファイル\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
@@ -54,28 +54,28 @@
     <ClCompile Include="SceneTitle.cpp">
       <Filter>ソース ファイル\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGameClearResult.cpp">
-      <Filter>ソース ファイル\Scenes\SpeedPush</Filter>
+    <ClCompile Include="SceneBase.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGameOverResult.cpp">
-      <Filter>ソース ファイル\Scenes\SpeedPush</Filter>
+    <ClCompile Include="Vec2.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
-      <Filter>ソース ファイル\Scenes\SpeedPush</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="SceneIceSpein.cpp">
-      <Filter>ソース ファイル\Scenes\IceSpin</Filter>
+    <ClCompile Include="SelectMenu.cpp">
+      <Filter>ソース ファイル\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="SceneMain.h">
+      <Filter>ヘッダー ファイル\Scenes\SpeedPush</Filter>
     </ClInclude>
-    <ClInclude Include="Vec2.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="SceneIceSpin.h">
+      <Filter>ヘッダー ファイル\IceSpin</Filter>
     </ClInclude>
-    <ClInclude Include="SelectMenu.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ヘッダー ファイル\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="SceneBase.h">
       <Filter>ヘッダー ファイル\Scenes</Filter>
@@ -86,20 +86,20 @@
     <ClInclude Include="SceneRuleTable.h">
       <Filter>ヘッダー ファイル\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="SceneTitle.h">
+    <ClInclude Include="Vec2.h">
+      <Filter>ヘッダー ファイル\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>ヘッダー ファイル\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectMenu.h">
       <Filter>ヘッダー ファイル\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="SceneGameClearResult.h">
-      <Filter>ヘッダー ファイル\Scenes\SpeedPush</Filter>
+      <Filter>ヘッダー ファイル\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="SceneGameOverResult.h">
-      <Filter>ヘッダー ファイル\Scenes\SpeedPush</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ヘッダー ファイル\Scenes\SpeedPush</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneIceSpein.h">
-      <Filter>ヘッダー ファイル\IceSpin</Filter>
+      <Filter>ヘッダー ファイル\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

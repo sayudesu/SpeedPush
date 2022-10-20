@@ -6,7 +6,7 @@
 #include "SceneGameClearResult.h"
 #include "SceneGameOverResult.h"
 #include "SceneRuleTable.h"
-#include "SceneIceSpein.h"
+#include "SceneIceSpin.h"
 
 SceneManager::SceneManager()
 {
