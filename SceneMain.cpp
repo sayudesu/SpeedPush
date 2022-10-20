@@ -14,7 +14,7 @@ namespace
 	//フェイント用の数字
 	constexpr int kFeintStop = 100;//100
 	//ボタンを押すまでの猶予
-	constexpr int kTimeHelp = 15;
+	constexpr int kTimeHelp = 15; //15
 	//フェイント用
 	constexpr int kFeintTimeHelp = 60;
 	//色指定
@@ -31,13 +31,13 @@ SceneMain::~SceneMain()
 
 	m_hGraphic = -1;
 
-	m_fadeIn = 0.0f;	//色を変更
+	m_fadeIn = 0.0f;	  //色を変更
 	m_fadeOut = 0.0f;
-	m_justTime = 0.0f;	//乱数を代入
-	m_sphereSize = 100.0f;	//球体のサイズを変更
-	m_time = 0.0f;	//制限時間をカウント
-	m_feintTime = 0.0f; //フェイント時間をカウント
-	m_buttonClick = 0.0f;	//クリック回数をカウント
+	m_justTime = 0.0f;	  //乱数を代入
+	m_sphereSize = 100.0f;//球体のサイズを変更
+	m_time = 0.0f;	      //制限時間をカウント
+	m_feintTime = 0.0f;   //フェイント時間をカウント
+	m_buttonClick = 0.0f; //クリック回数をカウント
 }
 void SceneMain::init()
 {
@@ -129,6 +129,7 @@ SceneBase* SceneMain::update()
 
 void SceneMain::draw()
 {
+	//背景を表示　
 	DrawExtendGraph(0, 0, Game::kScreenWidth, Game::kScreenHeight, m_hGraphic, true);
 
 #if false

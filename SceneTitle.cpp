@@ -52,7 +52,9 @@ void SceneTitle::draw()
 {
 	//タイトル画面用の背景画像
 	DrawExtendGraph(0, 0,Game::kScreenWidth,Game::kScreenHeight, m_hSceneGraphic , true);
-	//DrawGraph(0, 0, m_hSceneGraphic, TRUE);
+#if false
+	DrawGraph(0, 0, m_hSceneGraphic, TRUE);
+#endif
 	
 	//フォント変更
 	ChangeFont("MS UI Gothic");

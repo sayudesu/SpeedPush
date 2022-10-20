@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneBase.h"
 #include "Vec2.h"
+#include "game.h"
 
 class SceneIceSpein : public SceneBase
 {
@@ -16,21 +17,27 @@ public:
 		m_isLeftSide   = false;
 		m_isTracking   = false;
 
-		m_hPlayerGraphic    = 0;
-		m_hEnemyGraphic     = 0;
-		m_hEnemyBirdGraphic = 0;
-
-	    m_hMapGraphic    = 0;
+		m_hPlayerGraphic    = -1;
+		m_hEnemyGraphic     = -1;
+		m_hEnemyBirdGraphic = -1;
+		m_hMapGraphic       = -1;
+			;
 		m_count          = 0;
 		m_EnemyMoveCount = 0;
-		m_SphereSizeX    = 0;
-		m_SphereSizeY    = 0;
-		m_SphereSizeUp = 0.0f;
+		m_SphereSizeX    = Game::kScreenWidth / 2;
+		m_SphereSizeY    = Game::kScreenHeight / 2;
+		m_SphereSizeUp = 100.0f;
 		m_PlayerSizeX  = 0.0f;
 		m_PlayerSizeY  = 0.0f;
 
-		m_GetEnemyHitX     = 0.0f;
-		m_GetEnemyHitY     = 0.0f;
+		m_GetHitX     = 0.0f;
+		m_GetHitY     = 0.0f;
+		m_GetHit      = 0.0f;
+		m_CenterSize  = 0.0f;
+		m_CenterMatch = 0.0f;
+
+		m_GetEnemyHitX     = m_pos.x;
+		m_GetEnemyHitY     = m_pos.y;
 		m_GetEnemyHit      = 0.0f;
 		m_CenterEnemySize  = 0.0f;
 		m_CenterEnemyMatch = 0.0f;
@@ -41,15 +48,11 @@ public:
 		m_CenterEnemyBirdSize  = 0.0f;
 		m_CenterEnemyBirdMatch = 0.0f;
 
-		m_GetHitX     = 0.0f;
-		m_GetHitY     = 0.0f;
-		m_GetHit      = 0.0f;
-		m_CenterSize  = 0.0f;
-		m_CenterMatch = 0.0f;
-
 		m_PositionSide   = 0;
 	    m_PositionUpSide = 0;
 
+		m_pos.x = static_cast<float>(Game::kScreenWidth) / 2 - 40;
+		m_pos.y = static_cast<float>(Game::kScreenHeight) / 2 - 40;
 	}
 	virtual ~SceneIceSpein();
 

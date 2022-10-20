@@ -7,12 +7,12 @@ public:
 	SceneRuleTable()
 	{
 		m_isEnd = false;
+		m_hGraphic = -1;
 	}
-	virtual ~SceneRuleTable() {}
-
+	virtual ~SceneRuleTable();
 
 	virtual void init();
-	virtual void end() {}
+	virtual void end();
 
 	virtual SceneBase* update() override;
 	virtual void draw();
@@ -21,4 +21,6 @@ public:
 private:
 
 	bool m_isEnd;
+
+	int m_hGraphic;
 };
